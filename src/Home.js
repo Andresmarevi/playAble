@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {View, Text, Button, StyleSheet, style} from 'react-native'
+import {View, Text, Button, StyleSheet} from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { FlashList } from '@shopify/flash-list'
 import {firebase} from '../config'
@@ -7,7 +7,6 @@ import {firebase} from '../config'
 const Home = () =>{
     const [notes, setNotes] = useState([]);
     const navigation = useNavigation();
-
 
     useEffect(() => {
         firebase.firestore()
@@ -21,6 +20,7 @@ const Home = () =>{
             setNotes(newNotes);
         });
     }, []);
+
     return(
         <View style={styles.container}>
             <FlashList
@@ -38,13 +38,15 @@ const Home = () =>{
                     </View>
                 )}
             />    
-        <Button title='Add notes'
-             onPress={ ()=> navigation.navigate('NoteAdd')}/>
+            <Button title='Añadir notas'
+                onPress={ ()=> navigation.navigate('NoteAdd')}/>
+            <Button title='Juego Uno'
+                onPress={ ()=> navigation.navigate('JuegoUno')}/>
+            <Button title='Juego Dos'
+                onPress={ ()=> navigation.navigate('JuegoDos')}/>
         </View>
     )
 }
-
-
 
 export default Home
 

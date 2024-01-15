@@ -2,6 +2,8 @@ import 'react-native-gesture-handler'
 import Home from './src/Home';
 import NoteAdd from './src/NoteAdd';
 import Header from './src/Header';
+import JuegoUno from './src/JuegoUno';
+import JuegoDos from './src/JuegoDos';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -26,6 +28,24 @@ export default function App() {
         component={NoteAdd}
         name='NoteAdd'
         options={{headerTitle: () => <Header name='Add Notes' />,
+        headerStyle:{
+          backgroundColor: '#4c00b0',
+          height:120,
+        }}}
+        />
+        <Stack.Screen
+        component={JuegoUno}
+        name='JuegoUno'
+        options={{headerTitle: () => <Header name='Juego Uno' />,
+        headerStyle:{
+          backgroundColor: '#4c00b0',
+          height:120,
+        }}}
+        />
+        <Stack.Screen
+        component={JuegoDos}
+        name='JuegoDos'
+        options={{headerTitle: () => <Header name='Juego Dos' />,
         headerStyle:{
           backgroundColor: '#4c00b0',
           height:120,
