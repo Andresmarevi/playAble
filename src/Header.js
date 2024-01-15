@@ -6,10 +6,7 @@ const Header = (props) =>{
     const navigation = useNavigation();
     return(
         <View style={{margin:15}}>
-            <Text style={{fontWeight:'bold', fontSize:30, color:'white'}}>
-                {props.name}
-            </Text>
-        <Button title='Add notes'
+        <Button title='Login'
              onPress={ ()=> navigation.navigate('NoteAdd')}/>
         </View>
     )

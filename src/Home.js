@@ -2,49 +2,27 @@ import React, {useState, useEffect} from 'react'
 import {View, Text, Button, StyleSheet} from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { FlashList } from '@shopify/flash-list'
-import {firebase} from '../config'
 
 const Home = () =>{
     const [notes, setNotes] = useState([]);
     const navigation = useNavigation();
 
     useEffect(() => {
-        firebase.firestore()
-        .collection('notes')
-        .onSnapshot((querySnapshot) => {
-            const newNotes = [];
-            querySnapshot.forEach((doc) => {
-                const {note, title} = doc.data();
-                newNotes.push({note, title, id: doc.id});
-            });
-            setNotes(newNotes);
-        });
+
     }, []);
 
     return(
-        <View style={styles.container}>
-            <FlashList
-                data={notes}
-                numColumns={2}
-                estimatedItemSize={100}
-                renderItem={({item}) => (
-                    <View style={styles.noteView}>
-                        <Text style={styles.noteTitle}>
-                            {item.title}
-                        </Text>
-                        <Text style={styles.noteDescription}>
-                            {item.note}
-                        </Text>
-                    </View>
-                )}
-            />    
-            <Button title='Añadir notas'
-                onPress={ ()=> navigation.navigate('NoteAdd')}/>
-            <Button title='Juego Uno'
-                onPress={ ()=> navigation.navigate('JuegoUno')}/>
-            <Button title='Juego Dos'
-                onPress={ ()=> navigation.navigate('JuegoDos')}/>
-        </View>
+        <View>
+  <View style={{ flexDirection: 'column', justifyContent: 'center', marginBottom: 20, marginTop: 280 }}>
+    <Button title='Juego Uno'
+      onPress={() => navigation.navigate('JuegoUno')}
+    />
+    <Button title='Juego Dos'
+      onPress={() => navigation.navigate('JuegoDos')}
+    />
+  </View>
+</View>
+
     )
 }
 
@@ -72,8 +50,8 @@ const styles = StyleSheet.create({
         fontSize:20,
         fontWeight:'bold'
     },
-    noteDescription:{
-        fontSize:16,
-        marginTop: 5
+    Button:{
+        fontSize:50,
+        marginTop: 5  
     }
 })

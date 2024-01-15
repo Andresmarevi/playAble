@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler'
 import Home from './src/Home';
-import NoteAdd from './src/NoteAdd';
+import Login from './src/Login';
 import Header from './src/Header';
 import JuegoUno from './src/JuegoUno';
 import JuegoDos from './src/JuegoDos';
@@ -25,9 +25,9 @@ export default function App() {
         }}}
         />
         <Stack.Screen
-        component={NoteAdd}
-        name='NoteAdd'
-        options={{headerTitle: () => <Header name='Add Notes' />,
+        component={Login}
+        name='Login'
+        options={{headerTitle: () => <Header name='Login' />,
         headerStyle:{
           backgroundColor: '#4c00b0',
           height:120,
