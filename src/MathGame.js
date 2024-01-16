@@ -34,7 +34,6 @@ const MathGame = () => {
     if (!isNaN(userNum)) {
       const esCorrecto = userNum === correctAnswer;
 
-      
       Alert.alert(
         esCorrecto ? 'Correct' : 'Incorrect',
         esCorrecto ? 'Well Done!' : 'Sorry, Try again.',
@@ -43,15 +42,12 @@ const MathGame = () => {
       setIsCorrect(esCorrecto);
 
       if (esCorrecto) {
-        
         setCorrectAnswersCount((count) => (count < 20 ? count + 1 : 20));
       } else {
-        
         setCorrectAnswersCount(0);
       }
     } else {
       setIsCorrect(false);
-      
       setCorrectAnswersCount(0);
     }
   };
@@ -82,7 +78,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#87CEFA', // Light blue background color
   },
   question: {
     fontSize: 20,

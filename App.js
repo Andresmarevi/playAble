@@ -15,42 +15,54 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-        component={Home}
-        name='Home'
-        options={{headerTitle: () => <Header name='Notes' />,
-        headerStyle:{
-          backgroundColor: '#4c00b0',
-          height:120,
-        }}}
+      <Stack.Screen
+          component={Home}
+          name='Home'
+          options={{
+            headerTitle: () => <Header name='Login' />,
+            headerStyle: {
+              backgroundColor: '#D3D3D3',
+              height: 120,
+            },
+            headerTitleAlign: 'center', // Add this line to center the header title
+          }}
         />
         <Stack.Screen
         component={Login}
         name='Login'
-        options={{headerTitle: () => <Header name='Login' />,
-        headerStyle:{
-          backgroundColor: '#4c00b0',
-          height:120,
-        }}}
-        />
+        options={{
+          headerTitle: () => <Header name='Login' />,
+          headerStyle: {
+            backgroundColor: '#D3D3D3',
+            height: 120,
+          },
+          headerTitleAlign: 'center', // Add this line to center the header title
+        }}
+      />
         <Stack.Screen
         component={AnimalGame}
         name='AnimalGame'
-        options={{headerTitle: () => <Header name='Animal Game' />,
-        headerStyle:{
-          backgroundColor: '#4c00b0',
-          height:120,
-        }}}
-        />
+        options={{
+          headerTitle: () => <Header name='Login' />,
+          headerStyle: {
+            backgroundColor: '#D3D3D3',
+            height: 120,
+          },
+          headerTitleAlign: 'center', // Add this line to center the header title
+        }}
+      />
         <Stack.Screen
         component={MathGame}
         name='MathGame'
-        options={{headerTitle: () => <Header name='Math Game' />,
-        headerStyle:{
-          backgroundColor: '#4c00b0',
-          height:120,
-        }}}
-        />
+        options={{
+          headerTitle: () => <Header name='Login' />,
+          headerStyle: {
+            backgroundColor: '#D3D3D3',
+            height: 120,
+          },
+          headerTitleAlign: 'center', // Add this line to center the header title
+        }}
+      />
       </Stack.Navigator>
     </NavigationContainer>
   )

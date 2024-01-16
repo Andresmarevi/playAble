@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Button, StyleSheet, Image, Alert,Text } from 'react-native';
+import { View, TouchableOpacity, Button, StyleSheet, Image, Alert,Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -87,72 +87,82 @@ const AnimalGame = () => {
     const generateOptions = () => {
         const options = getRandomAnimals(currentAnimal);
         const buttons = options.map((option, index) => (
-            <View key={index} style={styles.buttonContainer}>
-                <Button title={option} onPress={() => handleButtonPress(option)} color="white" />
-            </View>
+          <TouchableOpacity
+            key={index}
+            style={styles.buttonContainer}
+            onPress={() => handleButtonPress(option)}
+          >
+            <Text style={styles.buttonText}>{option}</Text>
+          </TouchableOpacity>
         ));
         return (
-            <View style={styles.optionsContainer}>
-                <View style={styles.row}>{buttons.slice(0, 2)}</View>
-                <View style={styles.row}>{buttons.slice(2)}</View>
-            </View>
+          <View style={styles.optionsContainer}>
+            <View style={styles.row}>{buttons.slice(0, 2)}</View>
+            <View style={styles.row}>{buttons.slice(2)}</View>
+          </View>
         );
-    };
-
-    return (
+      };
+    
+      return (
         <View style={styles.container}>
-            <Image source={animalImages[currentAnimal].image} style={styles.image} />
-            <Text style={styles.livesText}>Lives: {lives}</Text>
-            <Text style={styles.correctAnswersText}>Correct answers: {correctAnswers}</Text>
-            {generateOptions()}
-        <View style={styles.buttonContainer}>
-            <Button title="Come back" onPress={() => navigation.goBack()} color="white" />
+          <Image source={animalImages[currentAnimal].image} style={styles.image} />
+          <Text style={styles.livesText}>Lives: {lives}</Text>
+          <Text style={styles.correctAnswersText}>Correct answers: {correctAnswers}</Text>
+          {generateOptions()}
+          <TouchableOpacity
+            style={styles.buttonContainer}
+            onPress={() => navigation.goBack()}
+          >
+            <Text style={styles.buttonText}>Come back</Text>
+          </TouchableOpacity>
         </View>
-    </View>
-    );
-};
-
-export default AnimalGame;
-
-const styles = StyleSheet.create({
-    container: {
+      );
+    };
+    
+    export default AnimalGame;
+    
+    const styles = StyleSheet.create({
+      container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#4c00b0'
-    },
-    image: {
+        backgroundColor: '#87CEFA', // Light blue background color
+      },
+      image: {
         width: 200,
         height: 200,
         marginBottom: 20,
-        resizeMode: 'contain'
-    },
-    optionsContainer: {
+        resizeMode: 'contain',
+      },
+      optionsContainer: {
         flexDirection: 'column',
         justifyContent: 'space-between',
-        width: '80%'
-    },
-    row: {
+        width: '80%',
+      },
+      row: {
         flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
-    buttonContainer: {
+        justifyContent: 'space-between',
+      },
+      buttonContainer: {
         width: '45%',
         margin: 10,
         backgroundColor: 'lightblue',
-        borderRadius: 5
-    },
-    livesText: {
+        borderRadius: 5,
+        alignItems: 'center',
+        paddingVertical: 10,
+      },
+      buttonText: {
         color: 'white',
         fontSize: 18,
-        marginBottom: 10
-    }
-    ,
-    correctAnswersText: {
+      },
+      livesText: {
         color: 'white',
         fontSize: 18,
-        marginBottom: 10
-    }
-});
-
-
+        marginBottom: 10,
+      },
+      correctAnswersText: {
+        color: 'white',
+        fontSize: 18,
+        marginBottom: 10,
+      },
+    });
