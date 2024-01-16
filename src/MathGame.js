@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const MathGame = () => {
@@ -10,6 +10,7 @@ const MathGame = () => {
   const [userAnswer, setUserAnswer] = useState('');
   const [question, setQuestion] = useState('');
   const [isCorrect, setIsCorrect] = useState(null);
+  const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
 
   useEffect(() => {
     generateQuestion();
@@ -31,9 +32,27 @@ const MathGame = () => {
     const userNum = parseInt(userAnswer, 10);
 
     if (!isNaN(userNum)) {
-      setIsCorrect(userNum === correctAnswer);
+      const esCorrecto = userNum === correctAnswer;
+
+      
+      Alert.alert(
+        esCorrecto ? 'Correct' : 'Incorrect',
+        esCorrecto ? 'Well Done!' : 'Sorry, Try again.',
+      );
+
+      setIsCorrect(esCorrecto);
+
+      if (esCorrecto) {
+        
+        setCorrectAnswersCount((count) => (count < 20 ? count + 1 : 20));
+      } else {
+        
+        setCorrectAnswersCount(0);
+      }
     } else {
       setIsCorrect(false);
+      
+      setCorrectAnswersCount(0);
     }
   };
 
@@ -48,11 +67,10 @@ const MathGame = () => {
         onChangeText={(text) => setUserAnswer(text)}
       />
       <Button title="Check Answer" onPress={checkAnswer} />
-      {isCorrect !== null && (
-        <Text style={styles.result}>
-          {isCorrect ? 'Correct!' : 'Incorrect. Try again!'}
-        </Text>
-      )}
+      {isCorrect !== null}
+      <View style={styles.counterContainer}>
+        <Text style={styles.counterText}>{correctAnswersCount}</Text>
+      </View>
       <Button title="Next Question" onPress={generateQuestion} />
       <Button title="Back to Home" onPress={() => navigation.goBack()} />
     </View>
@@ -82,6 +100,18 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginTop: 10,
     color: 'green',
+  },
+  counterContainer: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    backgroundColor: 'lightblue',
+    padding: 5,
+    borderRadius: 10,
+  },
+  counterText: {
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 
