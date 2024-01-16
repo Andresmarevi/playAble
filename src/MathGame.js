@@ -19,10 +19,109 @@ const MathGame = () => {
   const generateQuestion = () => {
     const newNum1 = Math.floor(Math.random() * 11);
     const newNum2 = Math.floor(Math.random() * 11);
+    let questionText = '';
 
-    setNum1(newNum1);
-    setNum2(newNum2);
-    setQuestion(`${newNum1} + ${newNum2} = ?`);
+    if (correctAnswersCount < 6) {
+      // Solo sumas y restas
+      const operation = Math.floor(Math.random() * 2);
+      switch (operation) {
+        case 0:
+          questionText = `${newNum1} + ${newNum2} = ?`;
+          setNum1(newNum1);
+          setNum2(newNum2);
+          break;
+        case 1:
+          questionText = `${newNum1} - ${newNum2} = ?`;
+          setNum1(newNum1);
+          setNum2(newNum2);
+          break;
+      }
+    } else if (correctAnswersCount < 11) {
+      // Sumas, multiplicaciones y divisiones
+      const operation = Math.floor(Math.random() * 4);
+      switch (operation) {
+        case 0:
+          questionText = `${newNum1} + ${newNum2} = ?`;
+          setNum1(newNum1);
+          setNum2(newNum2);
+          break;
+        case 1:
+          questionText = `${newNum1} - ${newNum2} = ?`;
+          setNum1(newNum1);
+          setNum2(newNum2);
+          break;
+        case 2:
+          questionText = `${newNum1} * ${newNum2} = ?`;
+          setNum1(newNum1);
+          setNum2(newNum2);
+          break;
+        case 3:
+          questionText = `${newNum1 * newNum2} / ${newNum2} = ?`;
+          setNum1(newNum1 * newNum2);
+          setNum2(newNum2);
+          break;
+      }
+    } else if (correctAnswersCount < 16) {
+      // Entre 2 y 3 operaciones
+      const operationsCount = Math.floor(Math.random() * 2) + 2;
+      let tempNum1 = newNum1;
+      for (let i = 0; i < operationsCount; i++) {
+        const tempNum2 = Math.floor(Math.random() * 11);
+        const operation = Math.floor(Math.random() * 4);
+        switch (operation) {
+          case 0:
+            questionText += `${tempNum1} + ${tempNum2} `;
+            tempNum1 += tempNum2;
+            break;
+          case 1:
+            questionText += `${tempNum1} - ${tempNum2} `;
+            tempNum1 -= tempNum2;
+            break;
+          case 2:
+            questionText += `${tempNum1} * ${tempNum2} `;
+            tempNum1 *= tempNum2;
+            break;
+          case 3:
+            questionText += `${tempNum1 * tempNum2} / ${tempNum2} `;
+            tempNum1 = tempNum1 * tempNum2 / tempNum2;
+            break;
+        }
+      }
+      questionText += '= ?';
+      setNum1(tempNum1);
+      setNum2(0);
+    } else {
+      // Entre 3 y 5 operaciones
+      const operationsCount = Math.floor(Math.random() * 3) + 3;
+      let tempNum1 = newNum1;
+      for (let i = 0; i < operationsCount; i++) {
+        const tempNum2 = Math.floor(Math.random() * 11);
+        const operation = Math.floor(Math.random() * 4);
+        switch (operation) {
+          case 0:
+            questionText += `${tempNum1} + ${tempNum2} `;
+            tempNum1 += tempNum2;
+            break;
+          case 1:
+            questionText += `${tempNum1} - ${tempNum2} `;
+            tempNum1 -= tempNum2;
+            break;
+          case 2:
+            questionText += `${tempNum1} * ${tempNum2} `;
+            tempNum1 *= tempNum2;
+            break;
+          case 3:
+            questionText += `${tempNum1 * tempNum2} / ${tempNum2} `;
+            tempNum1 = tempNum1 * tempNum2 / tempNum2;
+            break;
+        }
+      }
+      questionText += '= ?';
+      setNum1(tempNum1);
+      setNum2(0);
+    }
+
+    setQuestion(questionText);
     setUserAnswer('');
     setIsCorrect(null);
   };
