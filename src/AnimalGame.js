@@ -63,7 +63,7 @@ import { View, Button, StyleSheet, Image, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 
-const JuegoUno = () => {
+const AnimalGame = () => {
     const navigation = useNavigation();
     const [currentAnimal, setCurrentAnimal] = useState(0);
 
@@ -136,12 +136,12 @@ const JuegoUno = () => {
         <View style={styles.container}>
             <Image source={animalImages[currentAnimal].image} style={styles.image} />
             {generateOptions()}
-            <Button title='Regresar' onPress={() => navigation.goBack()} />
+            <Button title='Come back' onPress={() => navigation.goBack()} />
         </View>
     );
 };
 
-export default JuegoUno;
+export default AnimalGame;
 
 const styles = StyleSheet.create({
     container: {
