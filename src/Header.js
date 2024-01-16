@@ -7,7 +7,7 @@ const Header = (props) =>{
     return(
         <View style={{margin:15}}>
         <Button title='Login'
-             onPress={ ()=> navigation.navigate('NoteAdd')}/>
+             onPress={ ()=> navigation.navigate('Login')}/>
         </View>
     )
 }
