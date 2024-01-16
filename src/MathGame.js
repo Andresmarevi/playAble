@@ -77,34 +77,17 @@ const MathGame = () => {
         const correctAnswer = evaluate(leftSide);
         const isCorrect = Math.abs(userNum - correctAnswer) < 0.0001;
 
-<<<<<<< HEAD
       Alert.alert(
-        esCorrecto ? 'Correct' : 'Incorrect',
-        esCorrecto ? 'Well Done!' : 'Sorry, Try again.',
+        isCorrect ? 'Correct' : 'Incorrect',
+        isCorrect ? 'Well Done!' : 'Sorry, Try again.',
       );
-=======
-        Alert.alert(
-          isCorrect ? 'Correcto' : 'Incorrecto',
-          isCorrect ? '¡Bien hecho!' : 'Lo siento, inténtalo de nuevo.',
-        );
->>>>>>> a1a6776 (hay que hacer npm install mathjs)
 
         setIsCorrect(isCorrect);
 
-<<<<<<< HEAD
-      if (esCorrecto) {
-        setCorrectAnswersCount((count) => (count < 20 ? count + 1 : 20));
-      } else {
-        setCorrectAnswersCount(0);
-      }
-    } else {
-      setIsCorrect(false);
-      setCorrectAnswersCount(0);
-=======
         if (isCorrect) {
           setCorrectAnswersCount((count) => (count < 20 ? count + 1 : 20));
         } else {
-          setCorrectAnswersCount(0);
+          setCorrectAnswersCount(0, generateQuestion);
         }
       } else {
         setIsCorrect(false);
@@ -113,7 +96,6 @@ const MathGame = () => {
       generateQuestion();
     } catch (error) {
       console.error('Error evaluating the expression:', error);
->>>>>>> a1a6776 (hay que hacer npm install mathjs)
     }
   };
   
