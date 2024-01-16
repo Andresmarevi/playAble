@@ -75,7 +75,6 @@ const AnimalGame = () => {
         { image: require('../images/animals/elephant.png'), name: 'Elephant' },
         { image: require('../images/animals/fox.png'), name: 'Fox' },
         { image: require('../images/animals/hippo.png'), name: 'Hippo' },
-        { image: require('../images/animals/jiraffe.png'), name: 'Jiraffe' },
         { image: require('../images/animals/lion.png'), name: 'Lion' },
         { image: require('../images/animals/monkey.png'), name: 'Monkey' },
         { image: require('../images/animals/panda.png'), name: 'Panda' },
