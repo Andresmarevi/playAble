@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const JuegoDos = () => {
+const MathGame = () => {
   const navigation = useNavigation();
 
   const [num1, setNum1] = useState(0);
@@ -85,4 +85,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default JuegoDos;
+export default MathGame;

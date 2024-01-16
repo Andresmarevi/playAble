@@ -2,8 +2,8 @@ import 'react-native-gesture-handler'
 import Home from './src/Home';
 import Login from './src/Login';
 import Header from './src/Header';
-import JuegoUno from './src/JuegoUno';
-import JuegoDos from './src/JuegoDos';
+import AnimalGame from './src/AnimalGame';
+import MathGame from './src/MathGame';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -34,18 +34,18 @@ export default function App() {
         }}}
         />
         <Stack.Screen
-        component={JuegoUno}
-        name='JuegoUno'
-        options={{headerTitle: () => <Header name='Juego Uno' />,
+        component={AnimalGame}
+        name='AnimalGame'
+        options={{headerTitle: () => <Header name='Animal Game' />,
         headerStyle:{
           backgroundColor: '#4c00b0',
           height:120,
         }}}
         />
         <Stack.Screen
-        component={JuegoDos}
-        name='JuegoDos'
-        options={{headerTitle: () => <Header name='Juego Dos' />,
+        component={MathGame}
+        name='MathGame'
+        options={{headerTitle: () => <Header name='Math Game' />,
         headerStyle:{
           backgroundColor: '#4c00b0',
           height:120,

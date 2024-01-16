@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {View, Text, Button, StyleSheet} from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { FlashList } from '@shopify/flash-list'
 
 const Home = () =>{
     const [notes, setNotes] = useState([]);
@@ -14,11 +13,11 @@ const Home = () =>{
     return(
         <View>
   <View style={{ flexDirection: 'column', justifyContent: 'center', marginBottom: 20, marginTop: 280 }}>
-    <Button title='Juego Uno'
-      onPress={() => navigation.navigate('JuegoUno')}
+    <Button title='Animals'
+      onPress={() => navigation.navigate('AnimalGame')}
     />
-    <Button title='Juego Dos'
-      onPress={() => navigation.navigate('JuegoDos')}
+    <Button title='Maths'
+      onPress={() => navigation.navigate('MathGame')}
     />
   </View>
 </View>
