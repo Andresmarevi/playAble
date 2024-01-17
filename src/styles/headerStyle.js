@@ -9,7 +9,7 @@ export const headerStyles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    backgroundColor: 'lightgreen', // Your desired button color
+    backgroundColor: 'green', // Your desired button color
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 8,

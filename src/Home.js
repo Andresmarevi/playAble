@@ -23,6 +23,12 @@ const Home = () => {
           >
             <Text style={[styles.buttonText, styles.loginButtonText]}>Fun with Maths</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.button, styles.loginButton]}
+            onPress={() => navigation.navigate('users')}
+          >
+            <Text style={[styles.buttonText, styles.loginButtonText]}>Users</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>

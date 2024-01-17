@@ -4,6 +4,7 @@ import Login from './src/Login';
 import Header from './src/Header';
 import AnimalGame from './src/AnimalGame';
 import MathGame from './src/MathGame';
+import Register from './src/Register';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -39,6 +40,10 @@ export default function App() {
           headerTitleAlign: 'center', // Add this line to center the header title
         }}
       />
+      <Stack.Screen
+        component={Register}
+        name='Register'
+      />
         <Stack.Screen
         component={AnimalGame}
         name='AnimalGame'
@@ -63,7 +68,20 @@ export default function App() {
           headerTitleAlign: 'center', // Add this line to center the header title
         }}
       />
-      </Stack.Navigator>
+      
+      <Stack.Screen
+          component={users}
+          name='Users'
+          options={{
+            headerTitle: () => <Header name='Login' />,
+            headerStyle: {
+              backgroundColor: '#D3D3D3',
+              height: 120,
+            },
+            headerTitleAlign: 'center', // Add this line to center the header title
+          }}
+        />
+        </Stack.Navigator>
     </NavigationContainer>
   )
 }
