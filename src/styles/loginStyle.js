@@ -10,19 +10,44 @@ export const loginStyles = StyleSheet.create({
   title: {
     fontSize: 24,
     marginBottom: 20,
-    color: 'black', // Adjusted color to match the pattern
-    fontWeight: 'bold', // Added fontWeight
+    color: 'black',
+    fontWeight: 'bold',
   },
   input: {
     height: 40,
     width: '80%',
-    borderColor: 'lightblue', // Adjusted borderColor to match the pattern
+    borderColor: 'lightblue',
     borderWidth: 1,
     marginBottom: 20,
     paddingLeft: 10,
-    borderRadius: 5, // Added borderRadius
+    borderRadius: 5,
     color: 'black',
     backgroundColor: 'white',
+  },
+  buttonContainer: {
+    marginBottom: 10, // Separation between buttons
+  },
+  button: {
+    backgroundColor: 'lightgreen',
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 8,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  registerButton: {
+    backgroundColor: 'orange',
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 8,
+  },
+  registerButtonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   error: {
     color: 'red',
