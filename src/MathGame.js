@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { evaluate } from 'mathjs';
-import Sound from 'react-native-sound';
-import ImagePicker from 'react-native-image-picker';
 import { mathGameStyles as styles } from './styles/mathGameStyle';
 
 const MathGame = () => {
@@ -14,11 +12,6 @@ const MathGame = () => {
   const [question, setQuestion] = useState('');
   const [isCorrect, setIsCorrect] = useState(null);
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
-  const congratulationsSound = new Sound('congratulations.mp3', Sound.MAIN_BUNDLE, (error) => {
-    if (error) {
-      console.error('Failed to load sound', error);
-    }
-  });
 
   useEffect(() => {
     if (correctAnswersCount == 20) {
@@ -114,7 +107,6 @@ const MathGame = () => {
   useEffect(() => {
     if (correctAnswersCount === 20) {
       // Play the congratulations sound
-      congratulationsSound.play();
   
       // Display an alert with an image when correctAnswersCount reaches 20
       Alert.alert(
@@ -125,7 +117,6 @@ const MathGame = () => {
             text: 'OK',
             onPress: () => {
               // Stop the sound when the user presses OK
-              congratulationsSound.stop();
   
               // Navigate to the Home screen
               navigation.navigate('Home');

@@ -69,18 +69,6 @@ export default function App() {
         }}
       />
       
-      <Stack.Screen
-          component={users}
-          name='Users'
-          options={{
-            headerTitle: () => <Header name='Login' />,
-            headerStyle: {
-              backgroundColor: '#D3D3D3',
-              height: 120,
-            },
-            headerTitleAlign: 'center', // Add this line to center the header title
-          }}
-        />
         </Stack.Navigator>
     </NavigationContainer>
   )
