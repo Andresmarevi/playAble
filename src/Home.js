@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { styles } from './styles/homeStyle'; // Import styles from the styles.js file
 
 const Home = () => {
   const navigation = useNavigation();
@@ -27,46 +28,5 @@ const Home = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#87CEFA',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  content: {
-    width: '80%',
-  },
-  title: {
-    fontSize: 24,
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-  buttonContainer: {
-    marginTop: 20,
-    alignItems: 'center',
-  },
-  button: {
-    backgroundColor: 'white',
-    padding: 15,
-    marginBottom: 15,
-    borderRadius: 8,
-    width: '100%', // Make the buttons take the full width
-    alignItems: 'center',
-  },
-  buttonText: {
-    fontSize: 18,
-    color: '#87CEFA',
-  },
-  loginButton: {
-    backgroundColor: '#3498db', // Change the login button background color
-  },
-  loginButtonText: {
-    color: 'white', // Change the login button text color
-  },
-});
 
 export default Home;

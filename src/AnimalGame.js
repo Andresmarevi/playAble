@@ -22,7 +22,7 @@ const AnimalGame = () => {
 
   const handleVideoEnd = () => {
     setShowVideo(false);
-
+  
     if (currentAnimal + 1 < animalImages.length) {
       setCurrentAnimal(currentAnimal + 1);
     } else {
@@ -30,6 +30,11 @@ const AnimalGame = () => {
       setTimeout(() => {
         navigation.navigate('Home');
       }, 3000);
+    }
+  
+    // Check if videoRef is not null before using it
+    if (videoRef.current) {
+      videoRef.current.seek(0); // Reset the video to the beginning
     }
   };
 
@@ -124,7 +129,7 @@ const animalImages = [
 
 const getRandomAnimals = (excludeIndex) => {
   const allAnimals = animalImages.map(animal => animal.name);
-  const currentAnimalName = animalImages[currentAnimal].name;
+  const currentAnimalName = animalImages[excludeIndex].name; // Use excludeIndex here
   const filteredAnimals = allAnimals.filter((animal, index) => index !== excludeIndex);
   const randomAnimals = [];
 
