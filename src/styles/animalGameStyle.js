@@ -31,7 +31,7 @@ export const animalGameStyles = StyleSheet.create({
     paddingVertical: 10,
   },
   buttonText: {
-    color: '#4c00b0',
+    color: 'black',
     fontSize: 18,
   },
   livesText: {
