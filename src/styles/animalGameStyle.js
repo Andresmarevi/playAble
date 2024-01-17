@@ -56,4 +56,23 @@ export const animalGameStyles = StyleSheet.create({
     right: 0,
     backgroundColor: 'transparent',
   },
+  imageContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  image: {
+    width: 400, // Ajusta el tamaño según sea necesario
+    height: 400,
+    resizeMode: "contain", // Ajusta la escala de la imagen
+  },
+  optionsContainer: {
+    flexDirection: "row", // Alinea los elementos en filas en lugar de columnas
+    justifyContent: "space-around", // Distribuye el espacio alrededor de los elementos
+    marginTop: 10, // Puedes ajustar el margen según sea necesario
+  },
+  column: {
+    flexDirection: "column",
+    alignItems: "center",
+  },
 });
