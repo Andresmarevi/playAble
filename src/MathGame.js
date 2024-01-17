@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { evaluate } from 'mathjs';
+import { mathGameStyles as styles } from './styles/mathGameStyle';
 
 const MathGame = () => {
   const navigation = useNavigation();
@@ -120,43 +121,5 @@ const MathGame = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#87CEFA', // Light blue background color
-  },
-  question: {
-    fontSize: 20,
-    marginBottom: 20,
-  },
-  input: {
-    height: 40,
-    width: '80%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  result: {
-    fontSize: 18,
-    marginTop: 10,
-    color: 'green',
-  },
-  counterContainer: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
-    backgroundColor: 'lightblue',
-    padding: 5,
-    borderRadius: 10,
-  },
-  counterText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-});
 
 export default MathGame;
