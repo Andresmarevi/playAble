@@ -103,22 +103,35 @@ const MathGame = () => {
   
   return (
     <View style={styles.container}>
-      <Text style={styles.question}>{question}</Text>
-      <TextInput
-        style={styles.input}
-        keyboardType="numeric"
-        placeholder="Your answer"
-        value={userAnswer}
-        onChangeText={(text) => setUserAnswer(text)}
+    <Text style={styles.question}>{question}</Text>
+    <TextInput
+      style={styles.input}
+      keyboardType="numeric"
+      placeholder="Your answer"
+      value={userAnswer}
+      onChangeText={(text) => setUserAnswer(text)}
+    />
+
+    
+    <View style={styles.buttonContainer}>
+      <Button
+        title="Check Answer"
+        onPress={checkAnswer}
+        color="blue"
       />
-      <Button title="Check Answer" onPress={checkAnswer} />
-      {isCorrect !== null && (
-        <View style={styles.counterContainer}>
-          <Text style={styles.counterText}>{correctAnswersCount}</Text>
-        </View>
-      )}
-      <Button title="Back to Home" onPress={() => navigation.goBack()} />
+      <Button
+        title="Back to Home"
+        onPress={() => navigation.goBack()}
+        color="blue"
+      />
     </View>
+
+    {isCorrect !== null && (
+      <View style={styles.counterContainer}>
+        <Text style={styles.counterText}>{correctAnswersCount}</Text>
+      </View>
+    )}
+  </View>
   );
 };
 
