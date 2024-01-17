@@ -71,7 +71,7 @@ const MathGame = () => {
   const checkAnswer = () => {
     try {
       const userNum = parseFloat(userAnswer);
-
+   
       if (!isNaN(userNum)) {
         const parts = question.split('=').map(part => part.trim());
         const leftSide = parts[0];
@@ -90,7 +90,8 @@ const MathGame = () => {
         } else {
           setCorrectAnswersCount(0, generateQuestion);
         }
-      } else {
+      }else {
+        Alert.alert('Incorrect', 'Sorry, Try again.');
         setIsCorrect(false);
         setCorrectAnswersCount(0);
       }
@@ -116,7 +117,6 @@ const MathGame = () => {
           <Text style={styles.counterText}>{correctAnswersCount}</Text>
         </View>
       )}
-      <Button title="Next Question" onPress={generateQuestion} />
       <Button title="Back to Home" onPress={() => navigation.goBack()} />
     </View>
   );
