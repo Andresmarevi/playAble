@@ -1,6 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { View, TouchableOpacity, StyleSheet, Image, Alert, Text } from 'react-native';
-import Video from 'react-native-video';
+import React, { useState } from 'react';
+import { View, TouchableOpacity,Image, Alert, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { animalGameStyles as styles } from './styles/animalGameStyle';
 
