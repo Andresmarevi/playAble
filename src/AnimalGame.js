@@ -1,126 +1,187 @@
-import React, { useState, useRef } from 'react';
-import { View, TouchableOpacity, StyleSheet, Image, Alert, Text } from 'react-native';
-import Video from 'react-native-video';
-import { useNavigation } from '@react-navigation/native';
-import { animalGameStyles as styles } from './styles/animalGameStyle';
+import React, { useState, useEffect } from "react";
+import { View, TouchableOpacity, Image, Alert, Text, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { animalGameStyles as styles } from "./styles/animalGameStyle";
 
 const AnimalGame = () => {
   const navigation = useNavigation();
   const [currentAnimal, setCurrentAnimal] = useState(0);
   const [lives, setLives] = useState(3);
   const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [showSignImage, setShowSignImage] = useState(false);
 
   const resetGame = () => {
-    const randomAnimalIndex = Math.floor(Math.random() * animalImages.length);
-    setCurrentAnimal(randomAnimalIndex);
+    setCurrentAnimal(0);
     setLives(3);
     setCorrectAnswers(0);
+    setShowSignImage(false);
   };
 
-    const animalImages = [
-        { image: require('../images/animals/bear.png'), name: 'Bear' },
-        { image: require('../images/animals/cat.png'), name: 'Cat' },
-        { image: require('../images/animals/cow.png'), name: 'Cow' },
-        { image: require('../images/animals/crocodile.png'), name: 'Crocodile' },
-        { image: require('../images/animals/elephant.png'), name: 'Elephant' },
-        { image: require('../images/animals/fox.png'), name: 'Fox' },
-        { image: require('../images/animals/hippo.png'), name: 'Hippo' },
-        { image: require('../images/animals/lion.png'), name: 'Lion' },
-        { image: require('../images/animals/monkey.png'), name: 'Monkey' },
-        { image: require('../images/animals/panda.png'), name: 'Panda' },
-        { image: require('../images/animals/pig.png'), name: 'Pig' },
-        { image: require('../images/animals/rabbit.png'), name: 'Rabbit' },
-        { image: require('../images/animals/sheep.png'), name: 'Sheep' },
-        { image: require('../images/animals/squirrel.png'), name: 'Squirrel' },
-        { image: require('../images/animals/tiger.png'), name: 'Tiger' },
-        { image: require('../images/animals/zebra.png'), name: 'Zebra' },
-        // Puedes agregar más información de imágenes aquí...
-    ];
+  useEffect(() => {
+    setShowSignImage(false);
+  }, [currentAnimal]);
 
-    const getRandomAnimals = (excludeIndex) => {
-        const allAnimals = animalImages.map(animal => animal.name);
-        const currentAnimalName = animalImages[currentAnimal].name;
-        const filteredAnimals = allAnimals.filter((animal, index) => index !== excludeIndex);
-        const randomAnimals = [];
+  const animalImages = [
+    { image: require("../images/animals/bear.png"), name: "Bear" },
+    { image: require("../images/animals/cat.png"), name: "Cat" },
+    { image: require("../images/animals/cow.png"), name: "Cow" },
+    { image: require("../images/animals/crocodile.png"), name: "Crocodile" },
+    { image: require("../images/animals/elephant.png"), name: "Elephant" },
+    { image: require("../images/animals/fox.png"), name: "Fox" },
+    { image: require("../images/animals/hippo.png"), name: "Hippo" },
+    { image: require("../images/animals/lion.png"), name: "Lion" },
+    { image: require("../images/animals/monkey.png"), name: "Monkey" },
+    { image: require("../images/animals/panda.png"), name: "Panda" },
+    { image: require("../images/animals/pig.png"), name: "Pig" },
+    { image: require("../images/animals/rabbit.png"), name: "Rabbit" },
+    { image: require("../images/animals/sheep.png"), name: "Sheep" },
+    { image: require("../images/animals/squirrel.png"), name: "Squirrel" },
+    { image: require("../images/animals/tiger.png"), name: "Tiger" },
+    { image: require("../images/animals/zebra.png"), name: "Zebra" },
+    // Puedes agregar más información de imágenes aquí...
+  ];
+  
+  const signImages = [
+    require("../images/animalSigns/bear.png"),
+    require("../images/animalSigns/cat.png"),
+    require("../images/animalSigns/cow.png"),
+    require("../images/animalSigns/crocodile.png"),
+    require("../images/animalSigns/elephant.png"),
+    require("../images/animalSigns/fox.png"),
+    require("../images/animalSigns/hippo.png"),
+    require("../images/animalSigns/lion.png"),
+    require("../images/animalSigns/monkey.png"),
+    require("../images/animalSigns/panda.png"),
+    require("../images/animalSigns/pig.png"),
+    require("../images/animalSigns/rabbit.png"),
+    require("../images/animalSigns/sheep.png"),
+    require("../images/animalSigns/squirrel.png"),
+    require("../images/animalSigns/tiger.png"),
+    require("../images/animalSigns/zebra.png"),
+    // ... (resto de tus signos)
+  ];
 
-        // Elige tres animales aleatorios diferentes
-        while (randomAnimals.length < 3) {
-            const randomIndex = Math.floor(Math.random() * filteredAnimals.length);
-            const randomAnimal = filteredAnimals[randomIndex];
-            randomAnimals.push(randomAnimal);
-            filteredAnimals.splice(randomIndex, 1);
-        }
+  const getRandomAnimals = (excludeIndex) => {
+    const allAnimals = animalImages.map((animal) => animal.name);
+    const currentAnimalName = animalImages[currentAnimal].name;
+    const filteredAnimals = allAnimals.filter(
+      (animal, index) => index !== excludeIndex
+    );
+    const randomAnimals = [];
 
-        // Añade el nombre del animal actual como una de las opciones
-        const correctOptionIndex = Math.floor(Math.random() * 4);
-        randomAnimals.splice(correctOptionIndex, 0, currentAnimalName);
+    while (randomAnimals.length < 3) {
+      const randomIndex = Math.floor(Math.random() * filteredAnimals.length);
+      const randomAnimal = filteredAnimals[randomIndex];
+      randomAnimals.push(randomAnimal);
+      filteredAnimals.splice(randomIndex, 1);
+    }
 
-        return randomAnimals;
-    };
+    const correctOptionIndex = Math.floor(Math.random() * 4);
+    randomAnimals.splice(correctOptionIndex, 0, currentAnimalName);
 
-    const handleButtonPress = (option) => {
-        if (option === animalImages[currentAnimal].name) {
-            Alert.alert('Correct!');
-            setCorrectAnswers(correctAnswers + 1);
-            if (currentAnimal + 1 < animalImages.length) {
-                setCurrentAnimal(currentAnimal + 1);
-            } else {
-                Alert.alert('¡You won!');
-                setTimeout(() => {
-                    navigation.navigate('Home'); // Reemplaza 'Home' con el nombre de tu página principal
-                }, 3000);
-            }
-        } else {
-            setLives(lives - 1);
-            setCorrectAnswers(0)
-            Alert.alert('Incorrect! Lives left: ${lives - 1}, Try again.');
-            if (lives - 1 === 0) {
-                    Alert.alert(
-                    'Game Over',
-                    'Buena suerte para la próxima! Casi lo consigues',
-                    [{ text: 'OK', onPress: resetGame }]
-                );
-            }
-        };
-    };
+    return randomAnimals;
+  };
 
-    const generateOptions = () => {
-        const options = getRandomAnimals(currentAnimal);
-        const buttons = options.map((option, index) => (
-          <TouchableOpacity
-            key={index}
-            style={styles.buttonContainer}
-            onPress={() => handleButtonPress(option)}
-          >
-            <Text style={styles.buttonText}>{option}</Text>
-          </TouchableOpacity>
-        ));
-        return (
-          <View style={styles.optionsContainer}>
-            <View style={styles.row}>{buttons.slice(0, 2)}</View>
-            <View style={styles.row}>{buttons.slice(2)}</View>
-          </View>
-        );
-      };
-    
-      return (
-        <View style={styles.container}>
-          <Image source={animalImages[currentAnimal].image} style={styles.image} />
-          <Text style={styles.livesText}>Lives: {lives}</Text>
-          <Text style={styles.correctAnswersText}>Correct answers: {correctAnswers}</Text>
-          {generateOptions()}
-          <TouchableOpacity
-            style={styles.buttonContainer}
-            onPress={() => navigation.goBack()}
-          >
-            <Text style={styles.buttonText}>Come back</Text>
-          </TouchableOpacity>
-          
+  const handleButtonPress = (option) => {
+    if (option === animalImages[currentAnimal].name) {
+      setCorrectAnswers(correctAnswers + 1);
+      setShowSignImage(true);
+    } else {
+      setLives(lives - 1);
+      setCorrectAnswers(0);
+      Alert.alert(`Incorrect! Lives left: ${lives - 1}, Try again.`);
+      if (lives - 1 === 0) {
+        Alert.alert("Game Over", "Good luck next time! You almost had it.", [
+          { text: "OK", onPress: resetGame },
+        ]);
+      }
+    }
+  };
+
+  const handleNextQuestion = () => {
+    if (currentAnimal + 1 < animalImages.length) {
+      setCurrentAnimal(currentAnimal + 1);
+    } else {
+      Alert.alert("You won!");
+      setTimeout(() => {
+        navigation.navigate("Home");
+      }, 3000);
+    }
+  };
+
+  const generateOptions = () => {
+    const options = getRandomAnimals(currentAnimal);
+    const buttons = options.map((option, index) => (
+      <TouchableOpacity
+        key={index}
+        style={styles.buttonContainer}
+        onPress={() => handleButtonPress(option)}
+        disabled={showSignImage}
+      >
+        <Text style={styles.buttonText}>{option}</Text>
+      </TouchableOpacity>
+    ));
+
+    // Distribuir botones en dos columnas
+    const buttonsColumn1 = buttons.slice(0, 2);
+    const buttonsColumn2 = buttons.slice(2);
+
+    return (
+      <View style={styles.optionsContainer}>
+        <View style={styles.column}>
+          {buttonsColumn1}
         </View>
-      );
-    };
-    
-    export default AnimalGame;
+        <View style={styles.column}>
+          {buttonsColumn2}
+        </View>
+      </View>
+    );
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.imageContainer}>
+        {showSignImage ? (
+          <Image source={signImages[currentAnimal]} style={styles.image} />
+        ) : (
+          <Image
+            source={animalImages[currentAnimal].image}
+            style={styles.image}
+          />
+        )}
+      </View>
+
+      <Text style={styles.livesText}>Lives: {lives}</Text>
+      <Text style={styles.correctAnswersText}>
+        Correct answers: {correctAnswers}
+      </Text>
+
+      {showSignImage && (
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={handleNextQuestion}
+        >
+          <Text style={styles.buttonText}>Next Question</Text>
+        </TouchableOpacity>
+      )}
+
+      {!showSignImage && (
+        <View style={styles.optionsContainer}>
+          {generateOptions()}
+        </View>
+      )}
+
+      <TouchableOpacity
+        style={styles.buttonContainer}
+        onPress={() => navigation.goBack()}
+      >
+        <Text style={styles.buttonText}>Come back</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 
+export default AnimalGame;
 
+  
