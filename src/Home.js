@@ -27,8 +27,15 @@ const Home = () => {
             style={[styles.button, styles.loginButton]}
             onPress={() => navigation.navigate('ColorsGame')}
           >
-            <Text style={[styles.buttonText, styles.loginButtonText]}>Learn the colors</Text>
+            <Text style={[styles.buttonText, styles.loginButtonText]}>Time to learn the colors</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.button, styles.loginButton]}
+            onPress={() => navigation.navigate('AlphabetGame')}
+          >
+            <Text style={[styles.buttonText, styles.loginButtonText]}>Learn the alphabet</Text>
+          </TouchableOpacity>
+
 
         </View>
       </View>
