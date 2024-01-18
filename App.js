@@ -9,7 +9,6 @@ import ColorsGame from './src/ColorsGame';
 import AlphabetGame from './src/AlphabetGame';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import RegisterScreen from './src/Register';
 
 
 
@@ -24,7 +23,7 @@ export default function App() {
         name='Login'
       />
       <Stack.Screen
-        component={RegisterScreen}
+        component={Register}
         name='Register'
         options={{
           headerTitle: () => <Header name='Header' />,
