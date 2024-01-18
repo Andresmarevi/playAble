@@ -31,12 +31,9 @@ const Home = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.button, styles.loginButton]}
-            onPress={() => navigation.navigate('AlphabetGame')}
-          >
+            onPress={() => navigation.navigate('AlphabetGame')}>
             <Text style={[styles.buttonText, styles.loginButtonText]}>Learn the alphabet</Text>
           </TouchableOpacity>
-
-
         </View>
       </View>
     </View>

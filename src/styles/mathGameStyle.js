@@ -40,10 +40,10 @@ export const mathGameStyles = StyleSheet.create({
     fontWeight: 'bold',
   },
   buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '80%',
-    marginTop: 15, 
-    
-    },
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  width: '80%',
+  marginTop: 0, // or another specific value
+},
+
 });
