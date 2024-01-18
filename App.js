@@ -4,7 +4,6 @@ import Login from './src/Login';
 import Header from './src/Header';
 import AnimalGame from './src/AnimalGame';
 import MathGame from './src/MathGame';
-import Register from './src/Register';
 import ColorsGame from './src/ColorsGame';
 import AlphabetGame from './src/AlphabetGame';
 import { NavigationContainer } from '@react-navigation/native';
