@@ -1,3 +1,4 @@
+User
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 
@@ -15,6 +16,22 @@ const ColorGame = () => {
     { name: 'Tan', hex: '#D2B48C' },
     { name: 'White', hex: '#FFFFFF' },
   ];
+}
+  const ColorGameImages = () => {
+    const colorsImages = [
+      { image: require('../images/colors/black.png'),name: 'Black'},
+      { image: require('../images/colors/blue.png'),name: 'Blue'},
+      { image: require('../images/colors/brown.png'),name: 'Brown'},
+      { image: require('../images/colors/gray.png'),name: 'Gray'},
+      { image: require('../images/colors/green.png'),name: 'Green'},
+      { image: require('../images/colors/orange.png'),name: 'Orange'},
+      { image: require('../images/colors/pink.png'),name: 'Pink'},
+      { image: require('../images/colors/purple.png'),name: 'Purple'},
+      { image: require('../images/colors/red.png'),name: 'Red'},
+      { image: require('../images/colors/tan.png'),name: 'Tan'},
+      { image: require('../images/colors/white.png'),name: 'White'},
+      { image: require('../images/colors/yellow.png'),name: 'Yellow'},
+    ];
 
   const [currentColor, setCurrentColor] = useState({});
   const [score, setScore] = useState(0);
