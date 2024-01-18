@@ -2,12 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
 import { alphabetGameStyle as styles } from "./styles/alphabetGameStyle";
 
-const AlphabetGame = () => {
-  const alphabetImages = Array.from({ length: 26 }, (_, index) => {
-    const letter = String.fromCharCode(65 + index); // ASCII code for 'A' is 65
-    return { letter, image: require(`./images/${letter}.png`), gesture: '🤔' }; // Asumiendo que las imágenes se llaman 'A.png', 'B.png', etc.
-  });
+// Importa automáticamente todas las imágenes de la carpeta 'alphabet'
+const images = {};
+const importImages = require.context('./images/alphabet/', false, /\.(jpg)$/);
+importImages.keys().forEach(key => {
+  const letter = key.replace('./', '').replace('.jpg', '');
+  images[letter] = importImages(key);
+});
 
+const alphabetImages = Array.from({ length: 26 }, (_, index) => {
+  const letter = String.fromCharCode(65 + index);
+  return { letter, image: images[letter], gesture: '🤔' };
+});
+
+const AlphabetGame = () => {
   const [currentImage, setCurrentImage] = useState({});
   const [userInput, setUserInput] = useState('');
   const [score, setScore] = useState(0);
