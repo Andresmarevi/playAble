@@ -83,8 +83,8 @@ export default function App() {
         }}
       />
       <Stack.Screen
-        component={ColorsGame}
-        name='ColorsGame'
+        component={AlphabetGame}
+        name='AlphabetGame'
         options={{
           headerTitle: () => <Header name='Login' />,
           headerStyle: {
