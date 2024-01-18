@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
 import { alphabetGameStyle as styles } from "./styles/alphabetGameStyle";
 
 const AlphabetGame = () => {
-  const alphabetImages = [
-    { letter: 'A', gesture: '🅰️' },
-    { letter: 'B', gesture: '🅱️' },
-    { letter: 'C', gesture: '©️' },
-    // Agrega más letras y gestos según sea necesario
-  ];
+  const alphabetImages = Array.from({ length: 26 }, (_, index) => {
+    const letter = String.fromCharCode(65 + index); // ASCII code for 'A' is 65
+    return { letter, image: require(`./images/${letter}.png`), gesture: '🤔' }; // Asumiendo que las imágenes se llaman 'A.png', 'B.png', etc.
+  });
 
   const [currentImage, setCurrentImage] = useState({});
   const [userInput, setUserInput] = useState('');
@@ -55,9 +53,7 @@ const AlphabetGame = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        <Text style={styles.gestureText}>{currentImage.gesture}</Text>
-      </View>
+      <Image source={currentImage.image} style={styles.imageContainer} />
       <TextInput
         style={styles.input}
         placeholder="Escribe la letra"
@@ -73,6 +69,5 @@ const AlphabetGame = () => {
     </View>
   );
 };
-
 
 export default AlphabetGame;
