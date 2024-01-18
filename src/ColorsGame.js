@@ -3,11 +3,17 @@ import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 
 const ColorGame = () => {
   const colors = [
-    { name: 'Rojo', hex: '#FF0000' },
-    { name: 'Amarillo', hex: '#FFFF00' },
-    { name: 'Verde', hex: '#00FF00' },
-    { name: 'Azul', hex: '#0000FF' },
-    // Agrega más colores según sea necesario
+    { name: 'Red', hex: '#FF0000' },
+    { name: 'Yellow', hex: '#FFFF00' },
+    { name: 'Green', hex: '#00FF00' },
+    { name: 'Blue', hex: '#0000FF' },
+    { name: 'Brown', hex: '#8B4513' },
+    { name: 'Gray', hex: '#808080' },
+    { name: 'Orange', hex: '#FFA500' },
+    { name: 'Pink', hex: '#FFC0CB' },
+    { name: 'Purple', hex: '#800080' },
+    { name: 'Tan', hex: '#D2B48C' },
+    { name: 'White', hex: '#FFFFFF' },
   ];
 
   const [currentColor, setCurrentColor] = useState({});
@@ -25,7 +31,7 @@ const ColorGame = () => {
   };
 
   const startTimer = () => {
-    setTimeLeft(10);
+    setTimeLeft(50);
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {
         if (prevTime === 0) {
@@ -56,7 +62,7 @@ const ColorGame = () => {
     <View style={styles.container}>
       <Text style={styles.timerText}>{`Tiempo: ${timeLeft}s`}</Text>
       <View style={[styles.colorDisplay, { backgroundColor: currentColor.hex }]} />
-      <Text style={styles.instructionText}>{`Selecciona el color: ${currentColor.name}`}</Text>
+      <Text style={styles.instructionText}>{`Select the color: ${currentColor.name}`}</Text>
       <View style={styles.buttonContainer}>
         {colors.map((color) => (
           <TouchableOpacity
@@ -67,6 +73,7 @@ const ColorGame = () => {
           >
             <Text style={styles.buttonText}>{color.name}</Text>
           </TouchableOpacity>
+
         ))}
       </View>
       <Text style={styles.scoreText}>{`Puntaje: ${score}`}</Text>
