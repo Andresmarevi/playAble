@@ -6,31 +6,31 @@ export const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
     },
-    timerText: {
-      fontSize: 18,
-      marginBottom: 10,
-    },
-    colorDisplay: {
-      width: 200,
+    imageContainer: {
+      width: 100,
       height: 100,
       borderRadius: 10,
-      marginBottom: 20,
-    },
-    instructionText: {
-      fontSize: 16,
-      marginBottom: 20,
-    },
-    buttonContainer: {
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-      width: '100%',
-    },
-    colorButton: {
-      width: 80,
-      height: 40,
-      borderRadius: 5,
+      backgroundColor: '#eee',
       justifyContent: 'center',
       alignItems: 'center',
+      marginBottom: 20,
+    },
+    gestureText: {
+      fontSize: 40,
+    },
+    input: {
+      height: 40,
+      width: 200,
+      borderColor: 'gray',
+      borderWidth: 1,
+      marginBottom: 20,
+      textAlign: 'center',
+      textTransform: 'uppercase',
+    },
+    button: {
+      backgroundColor: '#007BFF',
+      padding: 10,
+      borderRadius: 5,
     },
     buttonText: {
       color: 'white',
@@ -42,4 +42,3 @@ export const styles = StyleSheet.create({
       fontWeight: 'bold',
     },
   });
-  
