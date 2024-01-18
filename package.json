@@ -18,7 +18,7 @@
     "@shopify/flash-list": "1.4.3",
     "expo": "~49.0.15",
     "expo-status-bar": "~1.6.0",
-    "firebase": "^9.23.0",
+    "firebase": "^10.7.1",
     "link": "^2.1.0",
     "mathjs": "^12.3.0",
     "react": "18.2.0",

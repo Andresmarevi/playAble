@@ -1,54 +1,47 @@
+// login.js
+
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { loginStyles as styles } from './styles/loginStyle';
+import { View, Text, TextInput, Button, Alert } from 'react-native';
+import firebase from './config'; // Adjust the path based on your project structure
 
-const Login = () => {
-  const navigation = useNavigation();
-
-  const [username, setUsername] = useState('');
+const LoginScreen = ({ navigation }) => {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
 
-  const handleLogin = () => {
-    // Add your authentication logic here
-    // For simplicity, let's assume a basic check for username and password
-    if (username === 'demo' && password === 'password') {
-      // Successful login, navigate to Home or Dashboard
+  const handleLogin = async () => {
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+      Alert.alert('Success', 'Logged in successfully');
       navigation.navigate('Home');
-    } else {
-      setError('Invalid username or password');
+    } catch (error) {
+      Alert.alert('Error', error.message);
     }
   };
 
-  const handleRegister = () => {
-    // Navigate to the Register screen
-    navigation.navigate('Register');
-  };
-
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
-      {error !== '' && <Text style={styles.error}>{error}</Text>}
+    <View>
+      <Text>Email:</Text>
       <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={(text) => setUsername(text)}
+        placeholder="Enter your email"
+        onChangeText={(text) => setEmail(text)}
+        value={email}
       />
+      <Text>Password:</Text>
       <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        value={password}
+        placeholder="Enter your password"
         onChangeText={(text) => setPassword(text)}
+        value={password}
+        secureTextEntry
       />
-      <View style={styles.buttonContainer}>
-        <Button style={styles.button} title="Login" onPress={handleLogin} />
-        <Button style={styles.registerButton} title="Register" onPress={handleRegister} />
-      </View>
+      <Button title="Login" onPress={handleLogin} />
+      <Text
+        onPress={() => navigation.navigate('Register')}
+        style={{ marginTop: 10, color: 'blue' }}
+      >
+        Don't have an account? Register here.
+      </Text>
     </View>
   );
 };
 
-export default Login;
+export default LoginScreen;

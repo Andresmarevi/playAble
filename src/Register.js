@@ -1,55 +1,40 @@
+
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { loginStyles as styles } from './styles/loginStyle';
+import { View, Text, TextInput, Button, Alert } from 'react-native';
+import firebase from './config';
 
-const Register = () => {
-  const navigation = useNavigation();
-
-  const [username, setUsername] = useState('');
+const RegisterScreen = ({ navigation }) => {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
 
-  const handleRegister = () => {
-    // Add your registration logic here
-    // For simplicity, let's assume a basic check for username and password
-    if (username && password && password === confirmPassword) {
-      // Successful registration, you might want to save the user data
-      // and then navigate to the login screen
-      navigation.navigate('Login');
-    } else {
-      setError('Invalid registration information');
+  const handleSignUp = async () => {
+    try {
+      await firebase.auth().createUserWithEmailAndPassword(email, password);
+      Alert.alert('Success', 'Account created successfully');
+      navigation.navigate('Login'); // Navigate to the login screen after successful registration
+    } catch (error) {
+      Alert.alert('Error', error.message);
     }
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Register</Text>
-      {error !== '' && <Text style={styles.error}>{error}</Text>}
+    <View>
+      <Text>Email:</Text>
       <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={(text) => setUsername(text)}
+        placeholder="Enter your email"
+        onChangeText={(text) => setEmail(text)}
+        value={email}
       />
+      <Text>Password:</Text>
       <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        value={password}
+        placeholder="Enter your password"
         onChangeText={(text) => setPassword(text)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Confirm Password"
+        value={password}
         secureTextEntry
-        value={confirmPassword}
-        onChangeText={(text) => setConfirmPassword(text)}
       />
-      <Button title="Register" onPress={handleRegister} />
+      <Button title="Register" onPress={handleSignUp} />
     </View>
   );
 };
 
-export default Register;
+export default RegisterScreen;
