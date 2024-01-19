@@ -38,7 +38,7 @@ const MathGame = () => {
   const [userAnswer, setUserAnswer] = useState('');
 
   const generateOperator = () => {
-    const operators = ['+', '-'];
+    const operators = score >= 10 ? ['+', '-', '*'] : ['+', '-'];
     return operators[Math.floor(Math.random() * operators.length)];
   };
 
@@ -48,16 +48,21 @@ const MathGame = () => {
         return num1 + num2;
       case '-':
         return num1 - num2;
+      case '*':
+        return num1 * num2;
       default:
         return null;
     }
   };
 
   const generateQuestion = () => {
-    const index1 = Math.floor(Math.random() * numberImages.length);
-    const index2 = Math.floor(Math.random() * numberImages.length);
-    const operator = generateOperator();
-    const answer = applyOperator(parseInt(numberImages[index1].name), parseInt(numberImages[index2].name), operator);
+    let index1, index2, operator, answer;
+    do {
+      index1 = Math.floor(Math.random() * numberImages.length);
+      index2 = Math.floor(Math.random() * numberImages.length);
+      operator = generateOperator();
+      answer = applyOperator(parseInt(numberImages[index1].name), parseInt(numberImages[index2].name), operator);
+    } while (answer > 20 || answer < 0);
 
     setNumImage1(numberImages[index1]);
     setNumImage2(numberImages[index2]);
@@ -69,10 +74,16 @@ const MathGame = () => {
 
   const checkAnswer = () => {
     if (parseInt(userAnswer) === parseInt(correctAnswer)) {
-      Alert.alert('Correcto!');
+      if(score + 1 === 30) {
+        Alert.alert('Correct, well done!');
+      }
       setScore(score + 1);
+      if (score + 1 === 30) {
+        Alert.alert('You won the game congratulations');
+        navigation.navigate('Home');
+      }
     } else {
-      Alert.alert('Incorrecto!');
+      Alert.alert('Wrong answer, Try Again!');
       setScore(0);
     }
     setUserAnswer('');
