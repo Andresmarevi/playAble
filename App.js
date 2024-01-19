@@ -26,14 +26,6 @@ export default function App() {
       <Stack.Screen
         component={Register}
         name='Register'
-        options={{
-          headerTitle: () => <Header name='Header' />,
-          headerStyle: {
-            backgroundColor: '#D3D3D3',
-            height: 120,
-          },
-          headerTitleAlign: 'center', // Add this line to center the header title
-        }}
       />
       <Stack.Screen
           component={Home}
@@ -43,14 +35,6 @@ export default function App() {
         <Stack.Screen
         component={AnimalGame}
         name='AnimalGame'
-        options={{
-          headerTitle: () => <Header name='Header' />,
-          headerStyle: {
-            backgroundColor: '#D3D3D3',
-            height: 120,
-          },
-          headerTitleAlign: 'center', // Add this line to center the header title
-        }}
       />
         <Stack.Screen
         component={MathGame}
@@ -79,14 +63,6 @@ export default function App() {
       <Stack.Screen
         component={AlphabetGame}
         name='AlphabetGame'
-        options={{
-          headerTitle: () => <Header name='Login' />,
-          headerStyle: {
-            backgroundColor: '#D3D3D3',
-            height: 120,
-          },
-          headerTitleAlign: 'center', // Add this line to center the header title
-        }}
       />
         </Stack.Navigator>
     </NavigationContainer>

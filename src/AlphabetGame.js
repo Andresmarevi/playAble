@@ -129,7 +129,8 @@ const AlphabetGame = ({ navigation }) => {
       <TouchableOpacity style={styles.button} onPress={handleAnswerSubmission}>
         <Text style={styles.buttonText}>Check</Text>
       </TouchableOpacity>
-      <Text style={styles.scoreText}>{`Score: ${score} (${consecutiveCorrect} in a row)`}</Text>
+      <Text style={styles.scoreText}>{`Score: ${score}`}</Text>
+      <Text style={styles.scoreText}>{`Your streak: ${consecutiveCorrect}`}</Text>
     </View>
   );
 };
