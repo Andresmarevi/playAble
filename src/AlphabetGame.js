@@ -82,7 +82,6 @@ const AlphabetGame = ({ navigation }) => {
         {
           text: 'OK',
           onPress: () => {
-            generateRandomImage();
             setUserInput('');
           },
         },
