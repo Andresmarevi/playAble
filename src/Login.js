@@ -13,7 +13,7 @@ const Login = ({ navigation }) => {
       Alert.alert('Success', 'Logged in successfully');
       navigation.navigate('Home');
     } catch (error) {
-      Alert.alert('Error', error.message);
+      Alert.alert('Login error', "The email or the password do not match."+ "\n" + "\n"+ "Please check again.");
     }
   };
 
