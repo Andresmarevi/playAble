@@ -1,7 +1,7 @@
-
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert } from 'react-native';
+import { View, Text, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
 import firebase from './config';
+import { styles } from './styles/registerStyle';
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -11,30 +11,36 @@ const RegisterScreen = ({ navigation }) => {
     try {
       await firebase.auth().createUserWithEmailAndPassword(email, password);
       Alert.alert('Success', 'Account created successfully');
-      navigation.navigate('Login'); // Navigate to the login screen after successful registration
+      navigation.navigate('Login');
     } catch (error) {
       Alert.alert('Error', error.message);
     }
   };
 
   return (
-    <View>
-      <Text>Email:</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Your new account</Text>
+      <Text style={styles.label}>Email:</Text>
       <TextInput
+        style={styles.input}
         placeholder="Enter your email"
         onChangeText={(text) => setEmail(text)}
         value={email}
       />
-      <Text>Password:</Text>
+      <Text style={styles.label}>Password:</Text>
       <TextInput
-        placeholder="Enter your password"
+        style={styles.input}
+        placeholder="Enter your new password"
         onChangeText={(text) => setPassword(text)}
         value={password}
         secureTextEntry
       />
-      <Button title="Register" onPress={handleSignUp} />
+      <TouchableOpacity onPress={handleSignUp} style={styles.button}>
+        <Text style={{ color: '#ecf0f1', textAlign: 'center', fontSize: 16 }}>Register</Text>
+      </TouchableOpacity>
+
     </View>
   );
 };
 
-export default RegisterScreen;
+export default Register;

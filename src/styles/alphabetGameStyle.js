@@ -5,7 +5,7 @@ export const alphabetGameStyle = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#87CEFA',
   },
   imageContainer: {
     width: 200,
@@ -19,6 +19,7 @@ export const alphabetGameStyle = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1,
     marginBottom: 10,
+    backgroundColor: '#ecf0f1',
     textAlign: 'center',
     fontSize: 18,
   },

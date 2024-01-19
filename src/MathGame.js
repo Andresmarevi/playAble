@@ -37,28 +37,43 @@ const MathGame = () => {
 ];
 
   useEffect(() => {
-    if (correctAnswersCount == 20) {
+    if (correctAnswersCount === 20) {
+      Alert.alert(
+        'Congratulations!',
+        'You completed 20 correct answers!',
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              navigation.navigate('Home');
+            },
+          },
+        ],
+        { cancelable: false }
+      );
+    }
+  }, [correctAnswersCount]);
+
+  useEffect(() => {
+    if (correctAnswersCount === 20) {
       setIsGameEnded(true);
     } else if (!isCorrect) {
       generateQuestion();
     }
   }, [correctAnswersCount, isCorrect]);
- 
 
-  
-  
   const generateQuestion = () => {
     let tempNum1, questionText, isInvalidResult;
-  
+
     do {
       tempNum1 = Math.floor(Math.random() * 11);
       isInvalidResult = false;
       questionText = `${tempNum1}`;
-  
+
       if (correctAnswersCount < 5) {
-        const operation = Math.floor(Math.random() * 2); // 0 for addition, 1 for subtraction
+        const operation = Math.floor(Math.random() * 2);
         const tempNum2 = Math.floor(Math.random() * 11);
-  
+
         if (operation === 0) {
           questionText += ` + ${tempNum2}`;
           tempNum1 += tempNum2;
@@ -71,24 +86,49 @@ const MathGame = () => {
         }
       } else {
         const operationsCount = correctAnswersCount < 10 ? 3 : correctAnswersCount < 16 ? 4 : 5;
-  
+
         for (let i = 0; i < operationsCount; i++) {
           const tempNum2 = Math.floor(Math.random() * 11);
-          const operation = Math.floor(Math.random() * 2); // 0 for addition, 1 for subtraction
+          const operation = Math.floor(Math.random() * 2);
           questionText += operation === 0 ? ` + ${tempNum2}` : ` - ${tempNum2}`;
           tempNum1 += operation === 0 ? tempNum2 : -tempNum2;
-  
+
           if (tempNum1 < 0 || tempNum1 > 20) {
             isInvalidResult = true;
-            break; // Stop the loop if an invalid result is encountered
+            break;
           }
         }
       }
     } while (isInvalidResult);
-  
-    questionText += ' = ?';
-  
-    setQuestion(questionText);
+
+    const questionElements = [];
+    questionText.split(' ').forEach((part, index) => {
+      const isNumber = !isNaN(part);
+      if (isNumber) {
+        const number = parseInt(part);
+        const imageInfo = numberImages.find((item) => item.name === part);
+
+        if (imageInfo) {
+          questionElements.push(
+            <Image key={index} source={imageInfo.image} style={styles.numberImage} />
+          );
+        } else {
+          questionElements.push(
+            <Text key={index} style={styles.questionText}>
+              {number}
+            </Text>
+          );
+        }
+      } else {
+        questionElements.push(
+          <Text key={index} style={styles.questionText}>
+            {part}
+          </Text>
+        );
+      }
+    });
+
+    setQuestion(questionElements);
     setUserAnswer('');
   };
 
@@ -101,7 +141,6 @@ const MathGame = () => {
         const leftSide = parts[0];
         const correctAnswer = evaluate(leftSide);
         const isCorrect = Math.abs(userNum - correctAnswer) < 0.0001;
-        
 
         Alert.alert(
           isCorrect ? 'Correct' : 'Incorrect',
@@ -125,33 +164,11 @@ const MathGame = () => {
     } catch (error) {
       console.error('Error evaluating the expression:', error);
     }
-    
   };
 
-  useEffect(() => {
-    if (correctAnswersCount === 20) {
-  
-      // Display an alert with an image when correctAnswersCount reaches 20
-      Alert.alert(
-        'Congratulations!',
-        'You completed 20 correct answers!',
-        [
-          {
-            text: 'OK',
-            onPress: () => {
-              // Navigate to the Home screen
-              navigation.navigate('Home');
-            },
-          },
-        ],
-        { cancelable: false }
-      );
-    }
-  }, [correctAnswersCount]);
-  
   return (
     <View style={styles.container}>
-      <Text style={styles.question}>{question}</Text>
+      <View style={styles.questionContainer}>{question}</View>
       <TextInput
         style={styles.input}
         keyboardType="numeric"

@@ -1,12 +1,11 @@
-// login.js
-
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert } from 'react-native';
-import firebase from './config'; // Adjust the path based on your project structure
+import { View, Text, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
+import firebase from './config';
+import { styles } from './styles/loginStyle';
 
-const LoginScreen = ({ navigation }) => {
+const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState();
 
   const handleLogin = async () => {
     try {
@@ -14,29 +13,33 @@ const LoginScreen = ({ navigation }) => {
       Alert.alert('Success', 'Logged in successfully');
       navigation.navigate('Home');
     } catch (error) {
-      Alert.alert('Error', error.message);
+      Alert.alert('Login error', "The email or the password do not match."+ "\n" + "\n"+ "Please check again.");
     }
   };
 
   return (
-    <View>
-      <Text>Email:</Text>
+    <View style={styles.container}>
+      <Text style={styles.label}>Email:</Text>
       <TextInput
+        style={styles.input}
         placeholder="Enter your email"
         onChangeText={(text) => setEmail(text)}
         value={email}
       />
-      <Text>Password:</Text>
+      <Text style={styles.label}>Password:</Text>
       <TextInput
+        style={styles.input}
         placeholder="Enter your password"
         onChangeText={(text) => setPassword(text)}
         value={password}
         secureTextEntry
       />
-      <Button title="Login" onPress={handleLogin} />
+      <TouchableOpacity onPress={handleLogin} style={styles.button}>
+        <Text style={{ color: '#ecf0f1', textAlign: 'center', fontSize: 16 }}>Login</Text>
+      </TouchableOpacity>
       <Text
         onPress={() => navigation.navigate('Register')}
-        style={{ marginTop: 10, color: 'blue' }}
+        style={styles.registerText}
       >
         Don't have an account? Register here.
       </Text>
@@ -44,4 +47,4 @@ const LoginScreen = ({ navigation }) => {
   );
 };
 
-export default LoginScreen;
+export default Login;

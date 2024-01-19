@@ -5,7 +5,7 @@ export const mathGameStyles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#87CEFA', 
+    backgroundColor: '#87CEFA',
   },
   question: {
     fontSize: 20,
@@ -40,10 +40,14 @@ export const mathGameStyles = StyleSheet.create({
     fontWeight: 'bold',
   },
   buttonContainer: {
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  width: '80%',
-  marginTop: 0, // or another specific value
-},
-
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '80%',
+    marginTop: 0, // or another specific value
+  },
+  numberImage: {
+    width: 40, // Adjust the width and height according to your needs
+    height: 40,
+    resizeMode: 'contain',
+  },
 });
