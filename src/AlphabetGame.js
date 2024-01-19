@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
 import { alphabetGameStyle as styles } from "./styles/alphabetGameStyle";
 
-// Importa las imágenes de manera explícita y almacénalas en un objeto
+
 const imageMap = {
   A: require('../images/alphabet/A.jpg'),
   B: require('../images/alphabet/B.jpg'),
@@ -30,10 +30,8 @@ const imageMap = {
   X: require('../images/alphabet/X.jpg'),
   Y: require('../images/alphabet/Y.jpg'),
   Z: require('../images/alphabet/Z.jpg'),
-  // ... agrega todas las letras con sus respectivas imágenes
 };
 
-// Crea el array de objetos con letra, imagen y gesto
 const alphabetImages = Array.from({ length: 26 }, (_, index) => {
   const letter = String.fromCharCode(65 + index);
   return { letter, image: imageMap[letter], gesture: '🤔' };
@@ -94,18 +92,19 @@ const AlphabetGame = ({ navigation }) => {
       {
         text: 'OK',
         onPress: () => {
-          navigation.navigate('Home'); // Vuelve al menú de inicio
+          navigation.navigate('Home'); 
         },
       },
     ]);
   };
 
-  const resetGame = () => {
-    setScore(0);
-    setConsecutiveCorrect(0);
-    generateRandomImage();
-    setUserInput('');
-  };
+  // const resetGame = () => {
+  //   setScore(0);
+  //   setConsecutiveCorrect(0);
+  //   generateRandomImage();
+  //   setUserInput('');
+  // };
+
 
   return (
     <View style={styles.container}>
