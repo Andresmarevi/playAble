@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native';
 
 const ColorGame = () => {
   const colors = [
@@ -14,24 +13,22 @@ const ColorGame = () => {
     { name: 'Pink', hex: '#FFC0CB' },
     { name: 'Purple', hex: '#800080' },
     { name: 'Tan', hex: '#D2B48C' },
-    { name: 'White', hex: '#FFFFFF' },
   ];
-}
-  const ColorGameImages = () => {
-    const colorsImages = [
-      { image: require('../images/colors/black.png'),name: 'Black'},
-      { image: require('../images/colors/blue.png'),name: 'Blue'},
-      { image: require('../images/colors/brown.png'),name: 'Brown'},
-      { image: require('../images/colors/gray.png'),name: 'Gray'},
-      { image: require('../images/colors/green.png'),name: 'Green'},
-      { image: require('../images/colors/orange.png'),name: 'Orange'},
-      { image: require('../images/colors/pink.png'),name: 'Pink'},
-      { image: require('../images/colors/purple.png'),name: 'Purple'},
-      { image: require('../images/colors/red.png'),name: 'Red'},
-      { image: require('../images/colors/tan.png'),name: 'Tan'},
-      { image: require('../images/colors/white.png'),name: 'White'},
-      { image: require('../images/colors/yellow.png'),name: 'Yellow'},
-    ];
+
+  const colorsImages = [
+    { image: require('../images/colors/black.png'), name: 'Black' },
+    { image: require('../images/colors/blue.png'), name: 'Blue' },
+    { image: require('../images/colors/brown.png'), name: 'Brown' },
+    { image: require('../images/colors/gray.png'), name: 'Gray' },
+    { image: require('../images/colors/green.png'), name: 'Green' },
+    { image: require('../images/colors/orange.png'), name: 'Orange' },
+    { image: require('../images/colors/pink.png'), name: 'Pink' },
+    { image: require('../images/colors/purple.png'), name: 'Purple' },
+    { image: require('../images/colors/red.png'), name: 'Red' },
+    { image: require('../images/colors/tan.png'), name: 'Tan' },
+    { image: require('../images/colors/white.png'), name: 'White' },
+    { image: require('../images/colors/yellow.png'), name: 'Yellow' },
+  ];
 
   const [currentColor, setCurrentColor] = useState({});
   const [score, setScore] = useState(0);
@@ -56,7 +53,7 @@ const ColorGame = () => {
           handleTimeUp();
           return 0;
         }
-        return prevTime - 1;
+        return prevTime -1;
       });
     }, 1000);
   };
@@ -70,29 +67,43 @@ const ColorGame = () => {
   };
 
   const handleTimeUp = () => {
-    Alert.alert('Tiempo agotado', `Tu puntaje final es: ${score}`, [
+    Alert.alert('Time Over.', `Your final score is: ${score}`, [
       { text: 'OK', onPress: () => setScore(0) },
     ]);
   };
 
+  const renderColorButtons = (start, end) => {
+    const columnColors = colors.slice(start, end);
+    return columnColors.map((color) => (
+      <TouchableOpacity
+        key={color.name}
+        style={styles.colorButton}
+        onPress={() => handleColorSelection(color.name)}
+        disabled={timeLeft === 0}
+      >
+        <Text style={styles.buttonText}>{color.name}</Text>
+      </TouchableOpacity>
+    ));
+  };
+
   return (
     <View style={styles.container}>
-      {/* ... */}
-      <View style={[styles.colorDisplay, { backgroundColor: currentColor.hex }]} />
-      <Text style={styles.instructionText}>{`Select the color: ${currentColor.name}`}</Text>
+      <Text style={styles.timerText}>{`Time: ${timeLeft}s`}</Text>
+      <Image
+        source={currentColor.image}
+        style={[styles.colorDisplay, { backgroundColor: currentColor.hex }]}
+        resizeMode="cover"
+      />
+      <Text style={styles.instructionText}>{`Select the color: `}</Text>
       <View style={styles.buttonContainer}>
-        {colors.map((color) => (
-          <TouchableOpacity
-            key={color.name}
-            style={[styles.colorButton, { backgroundColor: color.hex }]}
-            onPress={() => handleColorSelection(color.name)}
-            disabled={timeLeft === 0}
-          >
-            <Text style={styles.buttonText}>{color.name}</Text>
-          </TouchableOpacity>
-        ))}
+        <View style={styles.column}>
+          {renderColorButtons(0, 5)}
+        </View>
+        <View style={styles.column}>
+          {renderColorButtons(5, 10)}
+        </View>
       </View>
-      <Text style={styles.scoreText}>{`Puntaje: ${score}`}</Text>
+      <Text style={styles.scoreText}>{`Score: ${score}`}</Text>
     </View>
   );
 };
@@ -122,6 +133,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     width: '100%',
   },
+  column: {
+    alignItems: 'center',
+  },
   colorButton: {
     width: 80,
     height: 40,
@@ -130,7 +144,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
-    color: 'white',
+    color: 'black', // Set the text color
     fontWeight: 'bold',
   },
   scoreText: {
