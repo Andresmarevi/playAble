@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, Button, StyleSheet, Alert, Image, Text, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { View, TextInput, Button, Alert, Image, Text, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 // Importa tus estilos

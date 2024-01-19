@@ -5,7 +5,7 @@ export const mathGameStyles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#87CEFA',
   },
   questionContainer: {
     flexDirection: 'row',
@@ -17,7 +17,7 @@ export const mathGameStyles = StyleSheet.create({
     width: 100,
     height: 100,
     marginHorizontal: 10,
-    resizeMode: 'strech',
+    resizeMode: 'stretch',
   },
   operatorText: {
     fontSize: 24,
@@ -25,11 +25,13 @@ export const mathGameStyles = StyleSheet.create({
   },
   input: {
     height: 40,
+    width: 200,
     borderColor: 'gray',
     borderWidth: 1,
-    width: '80%',
+    marginBottom: 10,
+    backgroundColor: '#ecf0f1',
     textAlign: 'center',
-    marginBottom: 20,
+    fontSize: 18,
   },
   scoreText: {
     fontSize: 24,

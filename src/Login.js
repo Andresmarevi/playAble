@@ -41,7 +41,7 @@ const Login = ({ navigation }) => {
         onPress={() => navigation.navigate('Register')}
         style={styles.registerText}
       >
-        Don't have an account? Register here.
+        Don't have an account?     Register here
       </Text>
     </View>
   );
