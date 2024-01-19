@@ -170,13 +170,6 @@ const AnimalGame = () => {
           {generateOptions()}
         </View>
       )}
-
-      <TouchableOpacity
-        style={styles.buttonContainer}
-        onPress={() => navigation.goBack()}
-      >
-        <Text style={styles.buttonText}>Come back</Text>
-      </TouchableOpacity>
     </View>
   );
 };

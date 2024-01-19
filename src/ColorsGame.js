@@ -1,5 +1,6 @@
 import React, { useState, useEffect,useRef } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 
 const ColorGame = () => {
@@ -20,6 +21,7 @@ const ColorGame = () => {
   const [currentColor, setCurrentColor] = useState({});
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(10);
+  const navigation = useNavigation();
 
   useEffect(() => {
     generateRandomColor();
@@ -58,10 +60,11 @@ const ColorGame = () => {
   const handleTimeUp = () => {
     if (!alertShownRef.current) {
       alertShownRef.current = true;
-      Alert.alert('You lose!', `Your final score is: ${score}`, [
+      Alert.alert('Try again!', `Your final score is: ${score}`, [
         { text: 'OK', onPress: () => {
           setScore(0);
           alertShownRef.current = false;
+          navigation.navigate('Home');
         }},
       ]);
     }
@@ -109,6 +112,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#87CEFA',
   },
   timerText: {
     fontSize: 18,
@@ -142,12 +146,12 @@ const styles = StyleSheet.create({
     borderColor: 'black',
   },
   buttonText: {
-    color: 'black', // Set the text color
+    color: 'black', 
     fontWeight: 'bold',
-    fontSize:25,
+    fontSize:20,
   },
   scoreText: {
-    fontSize: 18,
+    fontSize: 22,
     marginTop: 20,
     fontWeight: 'bold',
   },
