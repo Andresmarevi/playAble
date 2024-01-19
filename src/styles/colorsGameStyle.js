@@ -1,10 +1,10 @@
 import { StyleSheet } from "react-native";
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   timerText: {
     fontSize: 18,
@@ -21,24 +21,30 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
   },
   buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    width: "100%",
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+  },
+  column: {
+    alignItems: 'center',
   },
   colorButton: {
     width: 80,
     height: 40,
     borderRadius: 5,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'black',
   },
   buttonText: {
-    color: "white",
-    fontWeight: "bold",
+    color: 'black', // Set the text color
+    fontWeight: 'bold',
+    fontSize:25,
   },
   scoreText: {
     fontSize: 18,
     marginTop: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
 });
