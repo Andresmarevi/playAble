@@ -77,7 +77,7 @@ const ColorGame = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.timerText}>{`Tiempo: ${timeLeft}s`}</Text>
+      {/* ... */}
       <View style={[styles.colorDisplay, { backgroundColor: currentColor.hex }]} />
       <Text style={styles.instructionText}>{`Select the color: ${currentColor.name}`}</Text>
       <View style={styles.buttonContainer}>
@@ -90,7 +90,6 @@ const ColorGame = () => {
           >
             <Text style={styles.buttonText}>{color.name}</Text>
           </TouchableOpacity>
-
         ))}
       </View>
       <Text style={styles.scoreText}>{`Puntaje: ${score}`}</Text>
