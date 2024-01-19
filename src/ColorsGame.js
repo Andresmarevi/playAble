@@ -2,21 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native';
 
 const ColorGame = () => {
-  const colors = [
-    { name: 'Red', hex: '#FF0000' },
-    { name: 'Yellow', hex: '#FFFF00' },
-    { name: 'Green', hex: '#00FF00' },
-    { name: 'Blue', hex: '#0000FF' },
-    { name: 'Brown', hex: '#8B4513' },
-    { name: 'Gray', hex: '#808080' },
-    { name: 'Orange', hex: '#FFA500' },
-    { name: 'Pink', hex: '#FFC0CB' },
-    { name: 'Purple', hex: '#800080' },
-    { name: 'Tan', hex: '#D2B48C' },
-  ];
 
   const colorsImages = [
-    { image: require('../images/colors/black.png'), name: 'Black' },
     { image: require('../images/colors/blue.png'), name: 'Blue' },
     { image: require('../images/colors/brown.png'), name: 'Brown' },
     { image: require('../images/colors/gray.png'), name: 'Gray' },
@@ -26,10 +13,9 @@ const ColorGame = () => {
     { image: require('../images/colors/purple.png'), name: 'Purple' },
     { image: require('../images/colors/red.png'), name: 'Red' },
     { image: require('../images/colors/tan.png'), name: 'Tan' },
-    { image: require('../images/colors/white.png'), name: 'White' },
     { image: require('../images/colors/yellow.png'), name: 'Yellow' },
   ];
-
+  const [alertShown, setAlertShown] = useState(false);
   const [currentColor, setCurrentColor] = useState({});
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(10);
@@ -40,8 +26,8 @@ const ColorGame = () => {
   }, [score]);
 
   const generateRandomColor = () => {
-    const randomIndex = Math.floor(Math.random() * colors.length);
-    setCurrentColor(colors[randomIndex]);
+    const randomIndex = Math.floor(Math.random() * colorsImages.length);
+    setCurrentColor(colorsImages[randomIndex]);
   };
 
   const startTimer = () => {
@@ -67,13 +53,17 @@ const ColorGame = () => {
   };
 
   const handleTimeUp = () => {
-    Alert.alert('Time Over.', `Your final score is: ${score}`, [
-      { text: 'OK', onPress: () => setScore(0) },
-    ]);
+    if (!alertShown) {
+      setAlertShown(true);
+      Alert.alert('Time Over.', `Your final score is: ${score}`, [
+        { text: 'OK', onPress: () => setScore(0) },
+      ]);
+    }
   };
 
+
   const renderColorButtons = (start, end) => {
-    const columnColors = colors.slice(start, end);
+    const columnColors = colorsImages.slice(start, end);
     return columnColors.map((color) => (
       <TouchableOpacity
         key={color.name}
@@ -88,7 +78,7 @@ const ColorGame = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.timerText}>{`Time: ${timeLeft}s`}</Text>
+      <Text style={styles.timerText}>{`Time: ${timeLeft}`}</Text>
       <Image
         source={currentColor.image}
         style={[styles.colorDisplay, { backgroundColor: currentColor.hex }]}
@@ -142,10 +132,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'black',
   },
   buttonText: {
     color: 'black', // Set the text color
     fontWeight: 'bold',
+    fontSize:25,
   },
   scoreText: {
     fontSize: 18,
