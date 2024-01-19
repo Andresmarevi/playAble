@@ -3,8 +3,38 @@ import { View, TouchableOpacity, Image, Alert, Text, StyleSheet } from "react-na
 import { useNavigation } from "@react-navigation/native";
 import { animalGameStyles as styles } from "./styles/animalGameStyle";
 
+const shuffleArray = (array) => {
+  const shuffledArray = [...array];
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+  }
+  return shuffledArray;
+};
+
+const imageMap = [
+  { image: require("../images/animals/bear.png"), name: "Bear" },
+  { image: require("../images/animals/cat.png"), name: "Cat" },
+  { image: require("../images/animals/cow.png"), name: "Cow" },
+  { image: require("../images/animals/crocodile.png"), name: "Crocodile" },
+  { image: require("../images/animals/elephant.png"), name: "Elephant" },
+  { image: require("../images/animals/fox.png"), name: "Fox" },
+  { image: require("../images/animals/hippo.png"), name: "Hippo" },
+  { image: require("../images/animals/lion.png"), name: "Lion" },
+  { image: require("../images/animals/monkey.png"), name: "Monkey" },
+  { image: require("../images/animals/panda.png"), name: "Panda" },
+  { image: require("../images/animals/pig.png"), name: "Pig" },
+  { image: require("../images/animals/rabbit.png"), name: "Rabbit" },
+  { image: require("../images/animals/sheep.png"), name: "Sheep" },
+  { image: require("../images/animals/squirrel.png"), name: "Squirrel" },
+  { image: require("../images/animals/tiger.png"), name: "Tiger" },
+  { image: require("../images/animals/zebra.png"), name: "Zebra" },
+  // Puedes agregar más información de imágenes aquí...
+];
+
 const AnimalGame = () => {
   const navigation = useNavigation();
+  const [animalImages, setAnimalImages] = useState(shuffleArray([...imageMap]));
   const [currentAnimal, setCurrentAnimal] = useState(0);
   const [lives, setLives] = useState(3);
   const [correctAnswers, setCorrectAnswers] = useState(0);
@@ -21,25 +51,7 @@ const AnimalGame = () => {
     setShowSignImage(false);
   }, [currentAnimal]);
 
-  const animalImages = [
-    { image: require("../images/animals/bear.png"), name: "Bear" },
-    { image: require("../images/animals/cat.png"), name: "Cat" },
-    { image: require("../images/animals/cow.png"), name: "Cow" },
-    { image: require("../images/animals/crocodile.png"), name: "Crocodile" },
-    { image: require("../images/animals/elephant.png"), name: "Elephant" },
-    { image: require("../images/animals/fox.png"), name: "Fox" },
-    { image: require("../images/animals/hippo.png"), name: "Hippo" },
-    { image: require("../images/animals/lion.png"), name: "Lion" },
-    { image: require("../images/animals/monkey.png"), name: "Monkey" },
-    { image: require("../images/animals/panda.png"), name: "Panda" },
-    { image: require("../images/animals/pig.png"), name: "Pig" },
-    { image: require("../images/animals/rabbit.png"), name: "Rabbit" },
-    { image: require("../images/animals/sheep.png"), name: "Sheep" },
-    { image: require("../images/animals/squirrel.png"), name: "Squirrel" },
-    { image: require("../images/animals/tiger.png"), name: "Tiger" },
-    { image: require("../images/animals/zebra.png"), name: "Zebra" },
-    // Puedes agregar más información de imágenes aquí...
-  ];
+  
   
   const signImages = [
     require("../images/animalSigns/bear.png"),
@@ -107,6 +119,22 @@ const AnimalGame = () => {
         navigation.navigate("Home");
       }, 3000);
     }
+  };
+
+  useEffect(() => {
+    generateRandomImage();
+  }, [score, animalImages]);
+
+  const generateRandomImage = () => {
+    if (animalImages.length === 0) {
+      handleGameComplete();
+      return;
+    }
+
+    const randomIndex = Math.floor(Math.random() * animalImages.length);
+    const randomAnimal = animalImages[randomIndex];
+
+    setCurrentAnimal(randomAnimal);
   };
 
   const generateOptions = () => {
