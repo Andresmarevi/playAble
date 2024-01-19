@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert, Image } from 'react-native';
+import { View, TextInput, Button, StyleSheet, Alert, Image, Text, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { evaluate } from 'mathjs';
-import { mathGameStyles as styles } from './styles/mathGameStyle';
+
+// Importa tus estilos
+import { mathGameStyles as styles } from "./styles/mathGameStyle";
 
 const MathGame = () => {
   const navigation = useNavigation();
-
-  const [isGameEnded, setIsGameEnded] = useState(false);
-  const [userAnswer, setUserAnswer] = useState('');
-  const [question, setQuestion] = useState('');
-  const [isCorrect, setIsCorrect] = useState(null);
-  const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
 
   const numberImages = [
     { image: require('../images/numbers/1.png'), name: '1' },
@@ -34,161 +29,80 @@ const MathGame = () => {
     { image: require('../images/numbers/18.png'), name: '18' },
     { image: require('../images/numbers/19.png'), name: '19' },
     { image: require('../images/numbers/20.png'), name: '20' },
-];
+  ];
 
-  useEffect(() => {
-    if (correctAnswersCount === 20) {
-      Alert.alert(
-        'Congratulations!',
-        'You completed 20 correct answers!',
-        [
-          {
-            text: 'OK',
-            onPress: () => {
-              navigation.navigate('Home');
-            },
-          },
-        ],
-        { cancelable: false }
-      );
-    }
-  }, [correctAnswersCount]);
+  const [numImage1, setNumImage1] = useState(null);
+  const [numImage2, setNumImage2] = useState(null);
+  const [operator, setOperator] = useState(null);
+  const [correctAnswer, setCorrectAnswer] = useState(null);
+  const [userAnswer, setUserAnswer] = useState('');
 
-  useEffect(() => {
-    if (correctAnswersCount === 20) {
-      setIsGameEnded(true);
-    } else if (!isCorrect) {
-      generateQuestion();
+  const generateOperator = () => {
+    const operators = ['+', '-'];
+    return operators[Math.floor(Math.random() * operators.length)];
+  };
+
+  const applyOperator = (num1, num2, operator) => {
+    switch (operator) {
+      case '+':
+        return num1 + num2;
+      case '-':
+        return num1 - num2;
+      default:
+        return null;
     }
-  }, [correctAnswersCount, isCorrect]);
+  };
 
   const generateQuestion = () => {
-    let tempNum1, questionText, isInvalidResult;
+    const index1 = Math.floor(Math.random() * numberImages.length);
+    const index2 = Math.floor(Math.random() * numberImages.length);
+    const operator = generateOperator();
+    const answer = applyOperator(parseInt(numberImages[index1].name), parseInt(numberImages[index2].name), operator);
 
-    do {
-      tempNum1 = Math.floor(Math.random() * 11);
-      isInvalidResult = false;
-      questionText = `${tempNum1}`;
-
-      if (correctAnswersCount < 5) {
-        const operation = Math.floor(Math.random() * 2);
-        const tempNum2 = Math.floor(Math.random() * 11);
-
-        if (operation === 0) {
-          questionText += ` + ${tempNum2}`;
-          tempNum1 += tempNum2;
-        } else {
-          questionText += ` - ${tempNum2}`;
-          tempNum1 -= tempNum2;
-          if (tempNum1 < 0 || tempNum1 > 20) {
-            isInvalidResult = true;
-          }
-        }
-      } else {
-        const operationsCount = correctAnswersCount < 10 ? 3 : correctAnswersCount < 16 ? 4 : 5;
-
-        for (let i = 0; i < operationsCount; i++) {
-          const tempNum2 = Math.floor(Math.random() * 11);
-          const operation = Math.floor(Math.random() * 2);
-          questionText += operation === 0 ? ` + ${tempNum2}` : ` - ${tempNum2}`;
-          tempNum1 += operation === 0 ? tempNum2 : -tempNum2;
-
-          if (tempNum1 < 0 || tempNum1 > 20) {
-            isInvalidResult = true;
-            break;
-          }
-        }
-      }
-    } while (isInvalidResult);
-
-    const questionElements = [];
-    questionText.split(' ').forEach((part, index) => {
-      const isNumber = !isNaN(part);
-      if (isNumber) {
-        const number = parseInt(part);
-        const imageInfo = numberImages.find((item) => item.name === part);
-
-        if (imageInfo) {
-          questionElements.push(
-            <Image key={index} source={imageInfo.image} style={styles.numberImage} />
-          );
-        } else {
-          questionElements.push(
-            <Text key={index} style={styles.questionText}>
-              {number}
-            </Text>
-          );
-        }
-      } else {
-        questionElements.push(
-          <Text key={index} style={styles.questionText}>
-            {part}
-          </Text>
-        );
-      }
-    });
-
-    setQuestion(questionElements);
-    setUserAnswer('');
+    setNumImage1(numberImages[index1]);
+    setNumImage2(numberImages[index2]);
+    setOperator(operator);
+    setCorrectAnswer(answer);
   };
+
+  const [score, setScore] = useState(0);
 
   const checkAnswer = () => {
-    try {
-      const userNum = parseFloat(userAnswer);
-
-      if (!isNaN(userNum)) {
-        const parts = question.split('=').map(part => part.trim());
-        const leftSide = parts[0];
-        const correctAnswer = evaluate(leftSide);
-        const isCorrect = Math.abs(userNum - correctAnswer) < 0.0001;
-
-        Alert.alert(
-          isCorrect ? 'Correct' : 'Incorrect',
-          isCorrect ? 'Well Done!' : 'Sorry, Try again.',
-        );
-
-        setIsCorrect(isCorrect);
-
-        if (isCorrect) {
-          setCorrectAnswersCount((count) => (count < 20 ? count + 1 : 20));
-        } else {
-          setCorrectAnswersCount(0);
-        }
-      } else {
-        Alert.alert('Incorrect', 'Sorry, Try again.');
-        setIsCorrect(false);
-        setCorrectAnswersCount(0);
-      }
-
-      generateQuestion();
-    } catch (error) {
-      console.error('Error evaluating the expression:', error);
+    if (parseInt(userAnswer) === parseInt(correctAnswer)) {
+      Alert.alert('Correcto!');
+      setScore(score + 1);
+    } else {
+      Alert.alert('Incorrecto!');
+      setScore(0);
     }
+    setUserAnswer('');
+    generateQuestion();
   };
 
+  useEffect(() => {
+    generateQuestion();
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <View style={styles.questionContainer}>{question}</View>
-      <TextInput
-        style={styles.input}
-        keyboardType="numeric"
-        placeholder="Your answer"
-        value={userAnswer}
-        onChangeText={(text) => setUserAnswer(text)}
-      />
-
-      <View style={styles.buttonContainer}>
-        <Button title="Check Answer" onPress={checkAnswer} color="blue" />
-        <Button title="Back to Home" onPress={() => navigation.goBack()} color="blue" />
-      </View>
-
-      {isCorrect !== null && (
-        <View style={styles.counterContainer}>
-          <Text style={styles.counterText}>{correctAnswersCount}</Text>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View style={styles.container}>
+        <Text style={styles.scoreText}>Score: {score}</Text>
+        <View style={styles.questionContainer}>
+          {numImage1 && <Image source={numImage1.image} style={styles.numberImage} />}
+          <Text style={styles.operatorText}>{operator}</Text>
+          {numImage2 && <Image source={numImage2.image} style={styles.numberImage} />}
         </View>
-      )}
-    </View>
+        <TextInput
+          style={styles.input}
+          onChangeText={setUserAnswer}
+          value={userAnswer}
+          keyboardType="numeric"
+        />
+        <Button title="Check Answer" onPress={checkAnswer} />
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
 export default MathGame;
+
