@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native';
+import { colorsGameStyle as styles } from "./styles/colorsGameStyle";
 
 const ColorGame = () => {
 
