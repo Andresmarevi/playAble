@@ -98,53 +98,6 @@ const ColorGame = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  timerText: {
-    fontSize: 18,
-    marginBottom: 10,
-  },
-  colorDisplay: {
-    width: 200,
-    height: 100,
-    borderRadius: 10,
-    marginBottom: 20,
-  },
-  instructionText: {
-    fontSize: 16,
-    marginBottom: 20,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    width: '100%',
-  },
-  column: {
-    alignItems: 'center',
-  },
-  colorButton: {
-    width: 80,
-    height: 40,
-    borderRadius: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: 'black',
-  },
-  buttonText: {
-    color: 'black', // Set the text color
-    fontWeight: 'bold',
-    fontSize:25,
-  },
-  scoreText: {
-    fontSize: 18,
-    marginTop: 20,
-    fontWeight: 'bold',
-  },
-});
+
 
 export default ColorGame;
