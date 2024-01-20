@@ -38,7 +38,7 @@ const AnimalGame = () => {
     { image: require("../images/animals/squirrel.png"), name: "Squirrel" },
     { image: require("../images/animals/tiger.png"), name: "Tiger" },
     { image: require("../images/animals/zebra.png"), name: "Zebra" },
-    // Puedes agregar más información de imágenes aquí...
+
   ];
   
   const signImages = [
@@ -58,7 +58,6 @@ const AnimalGame = () => {
     require("../images/animalSigns/squirrel.png"),
     require("../images/animalSigns/tiger.png"),
     require("../images/animalSigns/zebra.png"),
-    // ... (resto de tus signos)
   ];
 
   const getRandomAnimals = (excludeIndex) => {
@@ -152,9 +151,7 @@ const AnimalGame = () => {
       </View>
 
       <Text style={styles.livesText}>Lives: {lives}</Text>
-      <Text style={styles.correctAnswersText}>
-        Correct answers: {correctAnswers}
-      </Text>
+     
 
       {showSignImage && (
         <TouchableOpacity
