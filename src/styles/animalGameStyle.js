@@ -23,35 +23,28 @@ export const animalGameStyles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   buttonContainer: {
-    flexDirection: 'row', // Changed flexDirection to 'row' to arrange buttons horizontally
-    flexWrap: 'wrap', // Allows buttons to wrap to the next line when they exceed the container width
-    width: '80%', // Adjusted width for the container
-    marginVertical: 15, // Adjusted vertical margin
+    flexDirection: 'row',
+    flexWrap: 'wrap', 
+    width: '80%', 
+    marginVertical: 15, 
     backgroundColor: 'lightblue',
     borderRadius: 5,
     borderWidth: 1,
     borderColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 15, // Increased padding for button height
+    paddingVertical: 15, 
+    marginBottom: 50,
   },
   button: {
-    width: '45%', // Adjusted width for each button
-    margin: 5, // Added margin to separate buttons
+    width: '45%', 
+    margin: 5, 
     backgroundColor: 'lightblue',
     borderRadius: 5,
     borderWidth: 1,
     borderColor: 'black',
     alignItems: 'center',
-    paddingVertical: 15, // Increased padding for button height
-  },
-  thinButtonContainer: {
-    width: '25%', // Adjust the width to make the "Come back" button thinner
-    marginVertical: 10, // Added margin to separate the buttons vertically
-    backgroundColor: 'lightblue',
-    borderRadius: 5,
-    alignItems: 'center',
-    paddingVertical: 5, // Decreased padding for thinner button
+    paddingVertical: 15, 
   },
   buttonText: {
     color: 'black',
@@ -85,14 +78,14 @@ export const animalGameStyles = StyleSheet.create({
     justifyContent: "center",
   },
   image: {
-    width: 300, // Ajusta el tamaño según sea necesario
+    width: 300, 
     height: 300,
-    resizeMode: "contain", // Ajusta la escala de la imagen
+    resizeMode: "contain", 
   },
   optionsContainer: {
-    flexDirection: "row", // Alinea los elementos en filas en lugar de columnas
-    justifyContent: "space-around", // Distribuye el espacio alrededor de los elementos
-    marginTop: 10, // Puedes ajustar el margen según sea necesario
+    flexDirection: "row", 
+    justifyContent: "space-around", 
+    marginTop: 10, 
   },
   column: {
     flexDirection: "column",

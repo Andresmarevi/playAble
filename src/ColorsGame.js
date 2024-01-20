@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native';
-import { colorsGameStyles as styles } from "./styles/colorsGameStyle";
+import { colorsGameStyles as styles } from "./styles/colorsGameStyle";import { useNavigation } from '@react-navigation/native';
+
 
 const ColorGame = () => {
 
@@ -20,6 +21,7 @@ const ColorGame = () => {
   const [currentColor, setCurrentColor] = useState({});
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(10);
+  const navigation = useNavigation();
 
   useEffect(() => {
     generateRandomColor();
@@ -53,11 +55,17 @@ const ColorGame = () => {
     }
   };
 
+  const alertShownRef = useRef(false);
+
   const handleTimeUp = () => {
-    if (!alertShown) {
-      setAlertShown(true);
-      Alert.alert('Time Over.', `Your final score is: ${score}`, [
-        { text: 'OK', onPress: () => setScore(0) },
+    if (!alertShownRef.current) {
+      alertShownRef.current = true;
+      Alert.alert('Try again!', `Your final score is: ${score}`, [
+        { text: 'OK', onPress: () => {
+          setScore(0);
+          alertShownRef.current = false;
+          navigation.navigate('Home');
+        }},
       ]);
     }
   };
