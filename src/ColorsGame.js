@@ -60,12 +60,19 @@ const ColorGame = () => {
   const handleTimeUp = () => {
     if (!alertShownRef.current) {
       alertShownRef.current = true;
-      Alert.alert('Try again!', `Your final score is: ${score}`, [
-        { text: 'OK', onPress: () => {
-          setScore(0);
-          alertShownRef.current = false;
-          navigation.navigate('Home');
-        }},
+  
+      // Capture the current score before showing the alert
+      const currentScore = score;
+  
+      Alert.alert('Try again!', `Your final score is: ${currentScore}`, [
+        {
+          text: 'OK',
+          onPress: () => {
+            setScore(0);
+            alertShownRef.current = false;
+            navigation.navigate('Home');
+          },
+        },
       ]);
     }
   };
