@@ -10,12 +10,12 @@ const AnimalGame = () => {
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [showSignImage, setShowSignImage] = useState(false);
 
-  const resetGame = () => {
-    setCurrentAnimal(0);
-    setLives(3);
-    setCorrectAnswers(0);
-    setShowSignImage(false);
-  };
+  // const resetGame = () => {
+  //   setCurrentAnimal(0);
+  //   setLives(3);
+  //   setCorrectAnswers(0);
+  //   setShowSignImage(false);
+  // };
 
   useEffect(() => {
     setShowSignImage(false);
@@ -40,6 +40,19 @@ const AnimalGame = () => {
     { image: require("../images/animals/zebra.png"), name: "Zebra" },
 
   ];
+    
+  useEffect(() => {
+    generateOptions();
+  }, [currentAnimal]);
+
+  const shuffleArray = (array) => {
+    const shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+    }
+    return shuffledArray;
+  };
   
   const signImages = [
     require("../images/animalSigns/bear.png"),
@@ -81,6 +94,8 @@ const AnimalGame = () => {
     return randomAnimals;
   };
 
+  
+
   const handleButtonPress = (option) => {
     if (option === animalImages[currentAnimal].name) {
       setCorrectAnswers(correctAnswers + 1);
@@ -91,7 +106,12 @@ const AnimalGame = () => {
       Alert.alert(`Incorrect! Lives left: ${lives - 1}, Try again.`);
       if (lives - 1 === 0) {
         Alert.alert("Game Over", "Good luck next time! You almost had it.", [
-          { text: "OK", onPress: resetGame },
+          {
+            text: 'OK',
+            onPress: () => {
+              navigation.navigate('Home');
+            },
+          },
         ]);
       }
     }
@@ -109,7 +129,13 @@ const AnimalGame = () => {
   };
 
   const generateOptions = () => {
-    const options = getRandomAnimals(currentAnimal);
+    const shuffledAnimalImages = shuffleArray(animalImages);
+    
+    // Ensure that currentAnimal is within bounds
+    const currentIndex = currentAnimal % animalImages.length;
+    const currentAnimalImage = shuffledAnimalImages[currentIndex].image;
+
+    const options = getRandomAnimals(currentAnimalImage);
     const buttons = options.map((option, index) => (
       <TouchableOpacity
         key={index}
@@ -120,6 +146,8 @@ const AnimalGame = () => {
         <Text style={styles.buttonText}>{option}</Text>
       </TouchableOpacity>
     ));
+    
+    
 
     // Distribuir botones en dos columnas
     const buttonsColumn1 = buttons.slice(0, 2);
