@@ -1,6 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+export const colorsGameStyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -38,9 +38,9 @@ const styles = StyleSheet.create({
     borderColor: 'black',
   },
   buttonText: {
-    color: 'black', // Set the text color
+    color: 'black',
     fontWeight: 'bold',
-    fontSize:25,
+    fontSize: 25,
   },
   scoreText: {
     fontSize: 18,
@@ -48,3 +48,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
