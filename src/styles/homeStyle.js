@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
     padding: 15,
     marginBottom: 15,
     borderRadius: 8,
-    width: '100%', // Make the buttons take the full width
+    width: '100%',
     alignItems: 'center',
   },
   buttonText: {
@@ -34,9 +34,9 @@ export const styles = StyleSheet.create({
     color: '#87CEFA',
   },
   loginButton: {
-    backgroundColor: '#3498db', // Change the login button background color
+    backgroundColor: '#3498db',
   },
   loginButtonText: {
-    color: 'white', // Change the login button text color
+    color: 'white',
   },
 });

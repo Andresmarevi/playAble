@@ -1,4 +1,3 @@
-
 import { StyleSheet } from 'react-native';
 
 export const headerStyles = StyleSheet.create({
@@ -9,7 +8,7 @@ export const headerStyles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    backgroundColor: 'green', // Your desired button color
+    backgroundColor: 'green',
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 8,

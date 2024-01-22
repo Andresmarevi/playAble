@@ -140,7 +140,6 @@ const AnimalGame = () => {
   const generateOptions = () => {
     const shuffledAnimalImages = shuffleArray(animalImages);
     
-    // Ensure that currentAnimal is within bounds
     const currentIndex = currentAnimal % animalImages.length;
     const currentAnimalImage = shuffledAnimalImages[currentIndex].image;
 
@@ -156,9 +155,6 @@ const AnimalGame = () => {
       </TouchableOpacity>
     ));
     
-    
-
-    // Distribuir botones en dos columnas
     const buttonsColumn1 = buttons.slice(0, 2);
     const buttonsColumn2 = buttons.slice(2);
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect,useRef } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, Image } from 'react-native';
 import { colorsGameStyles as styles } from "./styles/colorsGameStyle";import { useNavigation } from '@react-navigation/native';
 
 
@@ -17,7 +17,7 @@ const ColorGame = () => {
     { image: require('../images/colors/tan.png'), name: 'Tan' },
     { image: require('../images/colors/yellow.png'), name: 'Yellow' },
   ];
-  const [alertShown, setAlertShown] = useState(false);
+  
   const [currentColor, setCurrentColor] = useState({});
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(10);
@@ -26,6 +26,7 @@ const ColorGame = () => {
   useEffect(() => {
     generateRandomColor();
     startTimer();
+    alertShownRef.current = false;
   }, [score]);
 
   const generateRandomColor = () => {
@@ -60,22 +61,24 @@ const ColorGame = () => {
   const handleTimeUp = () => {
     if (!alertShownRef.current) {
       alertShownRef.current = true;
-  
-      // Capture the current score before showing the alert
-      const currentScore = score;
-  
-      Alert.alert('Try again!', `Your final score is: ${currentScore}`, [
-        {
-          text: 'OK',
-          onPress: () => {
-            setScore(0);
-            alertShownRef.current = false;
-            navigation.navigate('Home');
+      setScore(prevScore => {
+        const currentScore = prevScore;
+        Alert.alert('Try again!', `Your final score is: ${currentScore}`, [
+          {
+            text: 'OK',
+            onPress: () => {
+              setScore(0);
+              setTimeLeft(0);
+              alertShownRef.current = false;
+              navigation.navigate('Home');
+            },
           },
-        },
-      ]);
+        ]);
+        return currentScore; 
+      });
     }
   };
+  
 
 
   const renderColorButtons = (start, end) => {

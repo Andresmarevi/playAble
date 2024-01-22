@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Alert, TouchableOpacity } from 'react-native';
 import firebase from './config';
 import { styles } from './styles/registerStyle';
 

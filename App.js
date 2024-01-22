@@ -1,7 +1,6 @@
 import 'react-native-gesture-handler'
 import Home from './src/Home';
 import Login from './src/Login';
-import Header from './src/Header';
 import AnimalGame from './src/AnimalGame';
 import MathGame from './src/MathGame';
 import Register from './src/Register';

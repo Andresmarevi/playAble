@@ -98,12 +98,6 @@ const AlphabetGame = ({ navigation }) => {
     ]);
   };
 
-  // const resetGame = () => {
-  //   setScore(0);
-  //   setConsecutiveCorrect(0);
-  //   generateRandomImage();
-  //   setUserInput('');
-  // };
 
 
   return (
