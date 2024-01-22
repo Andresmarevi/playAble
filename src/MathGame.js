@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, Button, Alert, Image, Text, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
-// Importa tus estilos
 import { mathGameStyles as styles } from "./styles/mathGameStyle";
 
 const MathGame = () => {
@@ -33,7 +31,9 @@ const MathGame = () => {
 
   const [numImage1, setNumImage1] = useState(null);
   const [numImage2, setNumImage2] = useState(null);
+  const [numImage3, setNumImage3] = useState(null);
   const [operator, setOperator] = useState(null);
+  const [operator2, setOperator2] = useState(null);
   const [correctAnswer, setCorrectAnswer] = useState(null);
   const [userAnswer, setUserAnswer] = useState('');
 
@@ -56,17 +56,31 @@ const MathGame = () => {
   };
 
   const generateQuestion = () => {
-    let index1, index2, operator, answer;
+    let index1, index2, index3, operator, operator2, answer;
     do {
       index1 = Math.floor(Math.random() * numberImages.length);
       index2 = Math.floor(Math.random() * numberImages.length);
       operator = generateOperator();
-      answer = applyOperator(parseInt(numberImages[index1].name), parseInt(numberImages[index2].name), operator);
+      if (score >= 20) {
+        index3 = Math.floor(Math.random() * numberImages.length);
+        operator2 = generateOperator();
+        answer = applyOperator(
+          applyOperator(parseInt(numberImages[index1].name), parseInt(numberImages[index2].name), operator),
+          parseInt(numberImages[index3].name),
+          operator2
+        );
+      } else {
+        answer = applyOperator(parseInt(numberImages[index1].name), parseInt(numberImages[index2].name), operator);
+      }
     } while (answer > 20 || answer < 0);
 
     setNumImage1(numberImages[index1]);
     setNumImage2(numberImages[index2]);
     setOperator(operator);
+    if (score >= 20) {
+      setNumImage3(numberImages[index3]);
+      setOperator2(operator2);
+    }
     setCorrectAnswer(answer);
   };
 
@@ -102,6 +116,12 @@ const MathGame = () => {
           {numImage1 && <Image source={numImage1.image} style={styles.numberImage} />}
           <Text style={styles.operatorText}>{operator}</Text>
           {numImage2 && <Image source={numImage2.image} style={styles.numberImage} />}
+          {score >= 20 && (
+            <>
+              <Text style={styles.operatorText}>{operator2}</Text>
+              {numImage3 && <Image source={numImage3.image} style={styles.numberImage} />}
+            </>
+          )}
         </View>
         <TextInput
           style={styles.input}

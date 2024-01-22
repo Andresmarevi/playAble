@@ -14,7 +14,7 @@ export const mathGameStyles = StyleSheet.create({
     marginBottom: 20,
   },
   numberImage: {
-    width: 100,
+    width: 80,
     height: 100,
     marginHorizontal: 10,
     resizeMode: 'stretch',
