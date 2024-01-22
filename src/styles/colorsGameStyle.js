@@ -5,6 +5,7 @@ export const colorsGameStyles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#87CEFA',
   },
   timerText: {
     fontSize: 18,
@@ -29,13 +30,14 @@ export const colorsGameStyles = StyleSheet.create({
     alignItems: 'center',
   },
   colorButton: {
-    width: 80,
+    width: 100,
     height: 40,
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
     borderColor: 'black',
+    backgroundColor: 'white',
   },
   buttonText: {
     color: 'black',
@@ -47,5 +49,10 @@ export const colorsGameStyles = StyleSheet.create({
     marginTop: 20,
     fontWeight: 'bold',
   },
+  colorDisplay: {
+    marginBottom: 20,
+    marginTop: 20,
+  },
+
 });
 

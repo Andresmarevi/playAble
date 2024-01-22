@@ -3,25 +3,12 @@ import { View, TouchableOpacity, Image, Alert, Text, StyleSheet } from "react-na
 import { useNavigation } from "@react-navigation/native";
 import { animalGameStyles as styles } from "./styles/animalGameStyle";
 
+
+
 const AnimalGame = () => {
-  const navigation = useNavigation();
-  const [currentAnimal, setCurrentAnimal] = useState(0);
-  const [lives, setLives] = useState(3);
-  const [correctAnswers, setCorrectAnswers] = useState(0);
-  const [showSignImage, setShowSignImage] = useState(false);
 
-  // const resetGame = () => {
-  //   setCurrentAnimal(0);
-  //   setLives(3);
-  //   setCorrectAnswers(0);
-  //   setShowSignImage(false);
-  // };
 
-  useEffect(() => {
-    setShowSignImage(false);
-  }, [currentAnimal]);
-
-  const animalImages = [
+  let animalImages = [
     { image: require("../images/animals/bear.png"), name: "Bear" },
     { image: require("../images/animals/cat.png"), name: "Cat" },
     { image: require("../images/animals/cow.png"), name: "Cow" },
@@ -40,10 +27,6 @@ const AnimalGame = () => {
     { image: require("../images/animals/zebra.png"), name: "Zebra" },
 
   ];
-    
-  useEffect(() => {
-    generateOptions();
-  }, [currentAnimal]);
 
   const shuffleArray = (array) => {
     const shuffledArray = [...array];
@@ -53,6 +36,26 @@ const AnimalGame = () => {
     }
     return shuffledArray;
   };
+
+
+  animalImages = shuffleArray(animalImages);
+  const navigation = useNavigation();
+  const [currentAnimal, setCurrentAnimal] = useState(Math.floor(Math.random() * animalImages.length));
+  const [lives, setLives] = useState(3);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [showSignImage, setShowSignImage] = useState(false);
+
+
+  useEffect(() => {
+    setShowSignImage(false);
+  }, [currentAnimal]);
+
+    
+  useEffect(() => {
+    generateOptions();
+  }, [currentAnimal]);
+
+  
   
   const signImages = [
     require("../images/animalSigns/bear.png"),
@@ -118,9 +121,15 @@ const AnimalGame = () => {
   };
 
   const handleNextQuestion = () => {
-    if (currentAnimal + 1 < animalImages.length) {
-      setCurrentAnimal(currentAnimal + 1);
+    const newAnimalIndex = Math.floor(Math.random() * animalImages.length);
+    if (newAnimalIndex !== currentAnimal) {
+      setCurrentAnimal(newAnimalIndex);
     } else {
+      handleNextQuestion();
+    }
+  
+    const allAnimalsShown = animalImages.every((animal, index) => index !== currentAnimal);
+    if (allAnimalsShown) {
       Alert.alert("You won!");
       setTimeout(() => {
         navigation.navigate("Home");
@@ -179,8 +188,7 @@ const AnimalGame = () => {
       </View>
 
       <Text style={styles.livesText}>Lives: {lives}</Text>
-     
-
+      
       {showSignImage && (
         <TouchableOpacity
           style={styles.buttonContainer}
