@@ -76,12 +76,10 @@ const AnimalGame = () => {
     require("../images/animalSigns/zebra.png"),
   ];
 
-  const getRandomAnimals = (excludeIndex) => {
+  const getRandomAnimals = () => {
     const allAnimals = animalImages.map((animal) => animal.name);
     const currentAnimalName = animalImages[currentAnimal].name;
-    const filteredAnimals = allAnimals.filter(
-      (animal, index) => index !== excludeIndex && animal !== currentAnimalName
-    );
+    const filteredAnimals = allAnimals.filter(animal => animal !== currentAnimalName);
     const randomAnimals = [];
 
     while (randomAnimals.length < 3) {
