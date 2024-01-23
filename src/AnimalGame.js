@@ -89,11 +89,15 @@ const AnimalGame = () => {
       filteredAnimals.splice(randomIndex, 1);
     }
 
-    const correctOptionIndex = Math.floor(Math.random() * 4);
+    let correctOptionIndex;
+    do {
+      correctOptionIndex = Math.floor(Math.random() * 4);
+    } while (randomAnimals[correctOptionIndex]);
+
     randomAnimals.splice(correctOptionIndex, 0, currentAnimalName);
 
     return randomAnimals;
-  };
+  };
 
   
 
