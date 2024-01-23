@@ -80,7 +80,7 @@ const AnimalGame = () => {
     const allAnimals = animalImages.map((animal) => animal.name);
     const currentAnimalName = animalImages[currentAnimal].name;
     const filteredAnimals = allAnimals.filter(
-      (animal, index) => index !== excludeIndex
+      (animal, index) => index !== excludeIndex && animal !== currentAnimalName
     );
     const randomAnimals = [];
 
